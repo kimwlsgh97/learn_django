@@ -22,3 +22,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class Corp(models.Model):
+    corp_id = models.IntegerField(primary_key=True)
+    corp_name = models.CharField(max_length=100, unique=True)
+    stock_code = models.IntegerField(null=True)
+    stock_price = models.IntegerField(null=True)
+    stock_num = models.IntegerField(null=True)
