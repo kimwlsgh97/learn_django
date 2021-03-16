@@ -10,11 +10,11 @@ from django.utils import timezone
 
 def index(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'portfolio/index.html', {'posts':posts})
+    return render(request, 'portfolio/index.html', {'posts':posts, 'cr_post':cr_post})
 
 def post_list(request):
-    msg = 'Post_list'
-    return render(request, 'portfolio/post_list.html', {'message':msg})
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'portfolio/post_list.html', {'posts':posts, 'cr_post':cr_post})
 
 def cr_post(author, title, text):
     Post.objects.create(author=author, title=title, text=text)
