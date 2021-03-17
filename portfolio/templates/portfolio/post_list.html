@@ -1,33 +1,11 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-</head>
-<body>
-    <div class="page-header">
-        <h1><a href="">Django Girls Blog</a></h1>
-    </div>
-
-    <div class="content container">
-        <div class="row">
-            <div class="col-md-8">
-                {% for post in posts %}
-                    <div class="post">
-                        <p>published: {{post.published_date}}</p>
-                        <h1><a href="">{{post.title}}</a></h1>
-                        <p>{{post.text|linebreaksbr}}</p>
-                        {# linebreaksbr : 행바뀜(Enter)를 문단으로 바꾸기 #}
-                    </div>
-                {% endfor %}
-            </div>
+{% extends 'portfolio/index.html' %}
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <p>published: {{post.published_date}}</p>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+            <p>{{post.text|linebreaksbr}}</p>
+            {# linebreaksbr : 행바뀜(Enter)를 문단으로 바꾸기 #}
         </div>
-    </div>
-</body>
-</html>
+    {% endfor %}
+{% endblock %}
