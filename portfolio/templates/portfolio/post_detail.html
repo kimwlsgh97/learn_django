@@ -5,8 +5,13 @@
             <div class="date">
                 {{post.published_date}}
             </div>
+        {% else %}
+            <a href="{% url 'post_publish' pk=post.pk %}" class="btn btn-default"><span class='glyphicon glyphicon-pencil'>게시</span></a>
         {% endif %}
-        <h1>{{post.title}}</h1>
+        {% if user.is_authenticated %}
+            <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-default"><span class='glyphicon glyphicon-pencil'>수정</span></a>
+        {% endif %}
+            <h1>{{post.title}}</h1>
         <p>{{post.text|linebreaksbr}}</p>
     </div>
 {% endblock %}
