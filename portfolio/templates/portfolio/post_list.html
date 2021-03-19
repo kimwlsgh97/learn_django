@@ -5,7 +5,7 @@
             <p>published: {{post.published_date}}</p>
             <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
             <p>{{post.text|linebreaksbr}}</p>
-            {# linebreaksbr : 행바뀜(Enter)를 문단으로 바꾸기 #}
+            <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{post.comments.count}}</a>
         </div>
     {% endfor %}
 {% endblock %}

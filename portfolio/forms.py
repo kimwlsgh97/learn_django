@@ -2,7 +2,7 @@
 from django import forms
 
 # 모델 불러오기
-from .models import Post
+from .models import Post, Comment
 
 # 폼만들기
 
@@ -13,3 +13,9 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'text',)
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('author', 'text',)
