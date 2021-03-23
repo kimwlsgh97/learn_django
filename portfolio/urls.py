@@ -17,4 +17,9 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     path('post/<int:pk>/comment/', views.add_comment_to_post, name='add_comment_to_post'),
+    path('corp/search/', views.corp_search, name='corp_search'),
+    path('corp/myport/new/', views.add_to_me, name='add_to_me'),
+    path('corp/myport/', views.myport, name='myport'),
+    path('corp/myport/<int:pk>/add_count/', views.add_count, name='add_count'),
+    path('corp/<int:pk>/remove/', views.port_remove, name='port_remove'),
 ]

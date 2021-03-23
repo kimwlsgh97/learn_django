@@ -3,11 +3,6 @@ from django.utils import timezone
 from django.conf import settings
 
 # Create your models here.
-# class Feedback(models.Model):
-#     name = models.CharField(max_length=100)
-#     email = models.EmailField()
-#     comment = models.TextField()
-#     createDate = models.DateTimeField()
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -36,9 +31,35 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
-# class Corp(models.Model):
-#     corp_id = models.IntegerField(primary_key=True)
-#     corp_name = models.CharField(max_length=100, unique=True)
-#     stock_code = models.BigIntegerField(null=True)
-#     stock_price = models.BigIntegerField(null=True)
-#     stock_num = models.IntegerField(null=True)
+
+#############################################################
+class Myport(models.Model):
+    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    portname = models.CharField(max_length=200)
+    created_date = models.DateTimeField(timezone.now())
+
+class Sector(models.Model):
+    port = models.ForeignKey('portfolio.Myport', on_delete=models.CASCADE, related_name='sectors')
+    sector_name = models.CharField(max_length=200)
+    sector_per = models.IntegerField(blank=True, null=True)
+
+class Mycorp(models.Model):
+    sector = models.ForeignKey('portfolio.Sector', on_delete=models.CASCADE, related_name='corps')
+    stock_code = models.TextField(unique=True, blank=True, null=True)
+    stock_name = models.TextField(unique=True, blank=True, null=True)
+    stock_count = models.IntegerField(default=0)
+    created_date = models.DateTimeField(timezone.now())
+
+#############################################################
+
+
+class Corp(models.Model):
+    stock_code = models.TextField(blank=True, null=True)
+    stock_name = models.TextField(blank=True, null=True)
+    stock_price = models.IntegerField(blank=True, null=True)
+    high_price = models.IntegerField(blank=True, null=True)
+    low_price = models.IntegerField(blank=True, null=True)
+    end_price = models.IntegerField(blank=True, null=True)
+    sell_count = models.IntegerField(blank=True, null=True)
+    sell_price = models.IntegerField(blank=True, null=True)
+    updown = models.FloatField(blank=True, null=True)

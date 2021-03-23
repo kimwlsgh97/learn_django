@@ -1,0 +1,17 @@
+{% extends 'portfolio/index.html' %}
+{% block content %}
+    {% for corp in corps %}
+        <div class="corp">
+            <h1>{{corp.stock_name}}</h1>
+            <p>{{corp.stock_code|linebreaksbr}}</p>
+        </div>
+        <form action="{% url 'add_to_me' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="stock_name" value={{corp.stock_name}}>
+            <input type="hidden" name="stock_code" value={{corp.stock_code}}>
+            <button type="submit" class="search btn btn-default">Add to Myport</button>
+        </form>
+    {% empty %}
+        <p>검색 결과가 없습니다.</p>
+    {% endfor %}
+{% endblock %}
