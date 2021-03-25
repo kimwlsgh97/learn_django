@@ -4,7 +4,7 @@ from django.utils import timezone
 
 from django.contrib.auth.models import User
 from .models import Post, Comment, Myport, Sector, Mycorp, Corp
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, MyportForm
 
 # from django.http import HttpResponse
 
@@ -79,48 +79,12 @@ def add_comment_to_post(request, pk):
 
 
 def corp_search(request):
-    stock_name = request.POST['corp_name'] # POST 요청 확인
-    if stock_name: # 회사 이름 있을때
-        corps = Corp.objects.filter(stock_name__contains=stock_name) #회사 리스트 가져옴
+    if request.method == 'POST':
+        stock_name = request.POST['corp_name'] # POST 요청 확인
+        if stock_name: # 회사 이름 있을때
+            corps = Corp.objects.filter(stock_name__contains=stock_name) #회사 리스트 가져옴
+    ports = Myport.objects.all()
+    return render(request, 'portfolio/corp_search.html', {"corps":corps,"ports":ports})
 
-    return render(request, 'portfolio/corp_search.html', {"corps":corps})
-
-@login_required    
-def add_to_me(request):
-    if request.method == "POST":
-        stock_name = request.POST['stock_name']
-        corp = Mycorp.objects.filter(stock_name=stock_name)
-        if corp:
-            return redirect('myport')
-        else:
-            stock_code = request.POST['stock_code']
-            Mycorp.objects.create(author=request.user, stock_code=stock_code,stock_name=stock_name, created_date=timezone.now())
-    else:
-        print("에러코드 : 000001")
-    return redirect('myport')
-
-
-@login_required
-def myport(request):
-    corps = Mycorp.objects.filter(author=request.user)
-    stocks = []
-    for corp in corps:
-        stocks.append(Corp.objects.filter(stock_name=corp.stock_name))
-
-    return render(request, "portfolio/myport.html",{"stocks":stocks})
-
-@login_required
-def add_count(request, pk):
-    corp = get_object_or_404(Mycorp, pk=pk)
-    if request.method == "POST":
-        corp.stock_count = request.POST['stock_count']
-        corp.save()
-    return redirect('myport')
-
-
-
-@login_required
-def port_remove(request, pk):
-    corp = get_object_or_404(Mycorp, pk=pk)
-    corp.delete()
-    return redirect('myport')
+def port_new(request):
+    return None
