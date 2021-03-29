@@ -1,0 +1,45 @@
+{% extends 'portfolio/index.html' %}
+{% block content %}
+    <div class="ports">
+        {% if error %}
+            <p>이미 포트폴리오에 있는 회사 입니다.</p>
+        {% endif %}
+        <div class="port-header">
+            <a href="{% url 'port_new' %}" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> 포트폴리오 만들기</span></a>
+        </div>
+
+        <div class="title">나의 포트폴리오</div>
+
+        {% for port in ports %}
+            <div class="port">
+
+                <div class="port_name">포트명 : {{port.portname}}</div>
+                <div><a href="{% url 'sector_new' pk=port.pk %}" class="btn btn_default"><span class="glyphicon glyphicon-plus"></span> 종목 만들기</span></a></div>
+                <div class="sector-header">
+                </div>
+                {% for sector in port.sectors.all %}
+                    <div class="sector">
+                        <div class="sector_name">종목명 : {{sector.sector_name}}</div>
+                        {% for corp in sector.corps.all %}
+                            <div class="corp_name">
+                                <div class="corp_text">회사명 : {{corp.stock_name}}</div>
+                                <div class="corp_form">
+                                    <form action="{% url 'port_remove' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="stock_name" value={{corp.stock_name}}>
+                                        <input type="hidden" name="portname" value={{port.portname}}>
+                                        <input type="hidden" name="sector_name" value={{sector.sector_name}}>
+                                        <button type="submit" class="save btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+            </div>  
+        {% empty %}
+            <p>회사가 추가되지 않았습니다.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

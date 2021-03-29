@@ -2,7 +2,7 @@
 from django import forms
 
 # 모델 불러오기
-from .models import Post, Comment, Myport
+from .models import Post, Comment, Myport, Sector
 
 # 폼만들기
 
@@ -26,3 +26,12 @@ class MyportForm(forms.ModelForm):
     class Meta:
         model = Myport
         fields = ('portname',)
+
+
+class SectorForm(forms.ModelForm):
+    class Meta:
+        model = Sector
+        fields = ('sector_name', 'sector_per',)
+
+class TestForm(forms.Form):
+    test = forms.CharField(label='test')

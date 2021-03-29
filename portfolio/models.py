@@ -38,18 +38,29 @@ class Myport(models.Model):
     portname = models.CharField(blank=True, null=True, max_length=200)
     created_date = models.DateTimeField(default=timezone.now)
 
+    def __str__(self):
+        return self.portname
+
 class Sector(models.Model):
+    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     port = models.ForeignKey('portfolio.Myport', on_delete=models.CASCADE, related_name='sectors')
     sector_name = models.CharField(blank=True, null=True, max_length=200)
     sector_per = models.IntegerField(blank=True, null=True)
 
+    def __str__(self):
+        return self.sector_name
+
 class Mycorp(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    port = models.ForeignKey('portfolio.Myport', on_delete=models.CASCADE, related_name='corps', null=True)
     sector = models.ForeignKey('portfolio.Sector', on_delete=models.CASCADE, related_name='corps')
-    stock_code = models.TextField(unique=True, blank=True, null=True)
-    stock_name = models.TextField(unique=True, blank=True, null=True)
+    stock_code = models.TextField(blank=True, null=True)
+    stock_name = models.TextField(blank=True, null=True)
     stock_count = models.IntegerField(default=0)
     created_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.stock_name
 
 #############################################################
 
@@ -65,3 +76,6 @@ class Corp(models.Model):
     sell_price = models.IntegerField(blank=True, null=True)
     updown = models.FloatField(blank=True, null=True)
     updated_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.stock_name

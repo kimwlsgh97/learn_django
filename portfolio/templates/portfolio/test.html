@@ -1,0 +1,8 @@
+{% extends 'portfolio/index.html' %}
+{% block content %}
+   <form method="post" class="port-form">
+       {% csrf_token %}
+       {{form.as_p}}
+       <button type="submit" class="save btn btn-default">Save</button>
+   </form> 
+{% endblock %}

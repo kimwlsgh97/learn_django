@@ -45,7 +45,7 @@ h1, h2, h3, h4 {
     margin-right: 20px;
 }
 
-.post {
+.post{
     margin-bottom: 70px;
 }
 
@@ -55,4 +55,40 @@ h1, h2, h3, h4 {
 
 .comment {
     margin: 20px 0px 20px 20px;
+}
+
+.corp {
+    display:flex;
+    margin-bottom: 70px;
+}
+
+.title{
+    color: #FCA205;
+}
+
+.ports div{
+    margin-bottom: 10px;
+}
+
+.port-header{
+    background-color: aliceblue;
+}
+
+.port_name{
+    background-color:#828282
+}
+
+
+
+.sector{
+    margin-left: 20px;
+}
+
+.corp_name{
+    display: flex;
+    margin-left: 20px;
+}
+
+.corp_name div{
+    margin-right:10px;
 }
