@@ -1,23 +1,62 @@
 from pykrx import stock
 import sqlite3
 import pandas as pd
-from datetime import datetime, date
+from datetime import datetime, timedelta
 
+def beforeDay(today, num):
+    result = today - timedelta(days=num)
+    return result
+
+    
 # 평일에만 업데이트 하도록 하기
-def isnew():
-    today = date.today()
-    week = today.weekday()
+def update():
+    now = datetime.now()
+    week = now.weekday()
+    year = now.year
+    month = now.month
+    day = now.day
+    time = now.time()
+
+    print('now', now)
+    print('year', year)
+    print('month', month)
+    print('week', week)
+    print('day', day)
+    print('time', time)
 
     if(week <5):
-        inputDB()
+        print("평일")
+
+        # 장 시간 검사 위한 변수 선언
+        # st_time = datetime(year, month, day, 9)
+        ed_time = datetime(year, month, day, 15, 30)       
+        
+        # 15:30 이전이면 전날 기준으로 크롤링
+        if (now < ed_time):
+            print("장중 입니다.")
+            # 월요일이면 3일전 금요일 지정
+            if week == 0:
+                fnDate = beforeDay(now, 3)
+            else:
+                # 하루 전날 지정하기
+                fnDate = beforeDay(now, 1)
+
+            inputDB(fnDate.strftime("%Y%m%d"))
+        else:
+            inputDB(now.strftime("%Y%m%d"))
     else:
-        print("장 운영시간이 아님.")
+        print("주말")
+        if(week == 5):
+            fnDate = beforeDay(now, 1)
+        elif(week == 6):
+            fnDate = beforeDay(now, 2)
+        inputDB(now.strftime("%Y%m%d"))
 
 
 # corp db에 저장
-def inputDB():
+def inputDB(now):
     # krx 사용 df 정보 스크랩
-    df, tickers, names = useKrx()
+    df, tickers, names = useKrx(now)
 
     # test.sqlite3 DB연결
     con, cur = useDB("corp.sqlite3")
@@ -36,8 +75,7 @@ def inputDB():
 
 
 # krx 스크랩
-def useKrx():
-    now = useDate()
+def useKrx(now):
     names = []
 
     print(now, "의 데이터를 가져옵니다.")
@@ -52,12 +90,6 @@ def useKrx():
 
     # 주가, 회사이름 반환
     return df, tickers, names
-
-
-# 스크랩을 위한 현재시간 가져오는 함수
-def useDate():
-    now = datetime.now()
-    return now.strftime('%Y%m%d')
 
 
 # db접속 함수
@@ -75,4 +107,4 @@ def alterDB(con, cur):
 
 # 이 함수로 불려졌을때 실행
 
-isnew()
+update()
