@@ -2,14 +2,20 @@
     display:flex;
     justify-content: space-between;
     margin-bottom: 70px;
+    border-bottom: 1px solid gray;
 }
 
 .search_info {
     margin-right: 50px;
+    margin-bottom: 20px;
 }
 
 .search_form {
     display:flex;
     align-items: center;
     justify-content: center;
+}
+
+.search_label{
+    font-size: 20px;
 }
