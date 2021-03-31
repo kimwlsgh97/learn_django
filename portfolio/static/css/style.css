@@ -1,58 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Syne+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+@import url('./port.css');
+@import url('./post.css');
+@import url('./corp_search.css');
+
 body {
-    font-family: 'Syne Mono', monospace;
+    font-family: 'Do Hyeon', sans-serif;
 }
 
-h1 a {
-    color: #FCA205;
-    font-family: 'Lobster', cursive;
+.container , .row , .col-md-9, .port, .all_port{
+    width: 100%;
 }
 
 .page-header {
     background-color: #ff9400;
     margin-top: 0;
     padding: 20px 20px 20px 40px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
     color: #ffffff;
 }
 
-.content {
-    margin-left: 40px;
+.search_form {
+    display:flex;
 }
 
-h1, h2, h3, h4 {
-    font-family: 'Lobster', cursive;
+.search {
+    margin-left: 10px;
 }
 
-.date {
-    color: #828282;
+.btn {
+    margin-right: 10px;
 }
 
 .save {
-    float: right;
-}
-
-.post-form textarea, .post-form input {
-    width: 100%;
-}
-
-.top-menu, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
-    float: right;
-    font-size: 26px;
-    margin-right: 20px;
-}
-
-.post {
-    margin-bottom: 70px;
-}
-
-.post h1 a, .post h1 a:visited {
-    color: #000000;
-}
-
-.comment {
-    margin: 20px 0px 20px 20px;
+    margin-left: 10px;
 }
