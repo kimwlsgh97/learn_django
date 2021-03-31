@@ -56,7 +56,7 @@ def update():
 # corp db에 저장
 def inputDB(now):
     # krx 사용 df 정보 스크랩
-    df, tickers, names = useKrx(now)
+    df, tickers, names = useKrx(now,"KOSPI")
 
     # test.sqlite3 DB연결
     con, cur = useDB("corp.sqlite3")
@@ -75,12 +75,12 @@ def inputDB(now):
 
 
 # krx 스크랩
-def useKrx(now):
+def useKrx(now, market):
     names = []
 
-    print(now, "의 데이터를 가져옵니다.")
+    print(now,"날짜의", market, "데이터를 가져옵니다.")
     # 티커 가져옴
-    tickers = stock.get_market_ticker_list(now, market="KOSPI")
+    tickers = stock.get_market_ticker_list(now, market=market)
     for ticker in tickers:
         # 이름 가져옴
         names.append(stock.get_market_ticker_name(ticker))

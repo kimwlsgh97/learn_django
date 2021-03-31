@@ -1,9 +1,9 @@
 {% extends 'portfolio/index.html' %}
 {% block content %}
-   <h1>New Sector</h1>
+   <h1>새로운 포트폴리오</h1>
    <form method="post" class="port-form">
        {% csrf_token %}
        {{form.as_p}}
-       <button type="submit" class="save btn btn-default">저장</button>
+       <button type="submit" class="save btn btn-default">Save</button>
    </form> 
 {% endblock %}

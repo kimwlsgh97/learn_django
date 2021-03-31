@@ -1,7 +1,11 @@
 # 회사 정보 초기화
-from update_corpDB import useDB, useDate
+from update_corpDB import useDB
 
-now = useDate()
+from datetime import datetime
+
+nowDate = datetime.now()
+now = nowDate.strftime("%Y%m%d")
+# now = "20210101"
 
 # 새로운 회사 정보 저장
 def setCorp(corp, cur):
@@ -31,7 +35,7 @@ def upCorp(corp, cur):
         updown=(?),
         stock_name=(?),
         updated_date=(?)
-        WHERE stock_name=(?)""", (corp[0],corp[1],corp[2],corp[3],corp[4],corp[5],corp[6],corp[7],corp[8],corp[8],now))
+        WHERE stock_name=(?)""", (corp[0],corp[1],corp[2],corp[3],corp[4],corp[5],corp[6],corp[7],corp[8],now,corp[8]))
 
 # 기조의 회사 정보 수정
 def deleteAll(corp, cur):
@@ -47,13 +51,18 @@ def updating():
     con.close()
     
     con, cur = useDB('db.sqlite3')
+
+    # print(corps)
     
     for corp in corps:
         # 이미 존재하는 회사라면 업데이트
-        try:
-            cur.execute("SELECT stock_name FROM portfolio_corp WHERE stock_name=(?)",(corp[8],))
+        cur.execute("SELECT stock_name FROM portfolio_corp WHERE stock_name=(?)",(corp[8],))
+        result = cur.fetchall()
+        if result:
+            print(corp[8], "업데이트 중")
             upCorp(corp,cur)
-        except:
+        else:
+            print(corp[8], "생성 중")
             setCorp(corp,cur)
 
         # 초기 DB 저장
@@ -63,7 +72,9 @@ def updating():
         # deleteAll(corp, cur)
         
     con.commit()
-    print("djangoDB 업데이트 완료")
+    con.close()
+
+    print("djangoDB에 적용 완료")
 
 
 updating()

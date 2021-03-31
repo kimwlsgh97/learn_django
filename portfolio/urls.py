@@ -25,7 +25,13 @@ urlpatterns = [
 
     path('port/', views.port, name='port'),
     path('port/new/', views.port_new, name='port_new'),
-    path('port/remove/', views.port_remove, name='port_remove'),
-    path('sector/<int:pk>', views.sector_new, name='sector_new'),
+    path('port/<int:pk>/remove/', views.port_remove, name='port_remove'),
+    
+    path('sector/<int:pk>/new/', views.sector_new, name='sector_new'),
+    path('sector/<int:pk>/add_corp', views.add_corp_to_sector, name='add_corp_to_sector'),
+    path('sector/<int:pk>/remove', views.sector_remove, name='sector_remove'),
+
+    path('corp/<int:pk>/remove', views.corp_remove, name='corp_remove'),
+    path('corp/add_count', views.add_count, name='add_count'),
     path('test/', views.test, name='test'),
 ]

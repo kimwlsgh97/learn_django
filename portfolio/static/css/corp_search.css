@@ -1,0 +1,15 @@
+.corp_search {
+    display:flex;
+    justify-content: space-between;
+    margin-bottom: 70px;
+}
+
+.search_info {
+    margin-right: 50px;
+}
+
+.search_form {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
