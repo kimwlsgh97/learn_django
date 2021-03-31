@@ -2,9 +2,17 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
+# 회원가입 폼 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+# from django.urls import reverse_lazy
+# from django.views import generic
+
 from django.contrib.auth.models import User
 from .models import Post, Comment, Myport, Sector, Mycorp, Corp
 from .forms import PostForm, CommentForm, MyportForm, SectorForm, TestForm
+
+
 
 # from django.http import HttpResponse
 
@@ -87,7 +95,7 @@ def corp_search(request):
     
 @login_required
 def port(request):
-    all_ports = Myport.objects.all()
+    all_ports = Myport.objects.filter(username=request.user)
     sectors = Sector.objects.all()
     port_corp = Mycorp.objects.all()
 
@@ -142,7 +150,21 @@ def sector_new(request, pk):
             return redirect('port')
     else:
         form = SectorForm()
-    return render(request, 'portfolio/sector_new.html', {'form':form, 'port':port})
+    return render(request, 'portfolio/sector_edit.html', {'form':form, 'port':port})
+
+@login_required
+def sector_edit(request, pk):
+    edit = True
+    sector = get_object_or_404(Sector, pk=pk)
+    if(request.method == 'POST'):
+        form = SectorForm(request.POST, instance=sector)
+        if form.is_valid():
+            form.save()      
+            return redirect('port')
+    else:
+        form = SectorForm(instance=sector)
+    return render(request, 'portfolio/sector_edit.html', {'form':form, 'port':port, 'edit':edit})
+
 
 @login_required
 def sector_remove(request,pk):
@@ -172,10 +194,10 @@ def corp_remove(request,pk):
     port_g = Myport.objects.get(portname=portname)
     
     sector_price = sector_g.sector_price
-    sector_price -= corp.info.stock_price
+    sector_price -= corp.info.stock_price*corp.stock_count
 
     port_price = port_g.port_price
-    port_price -= corp.info.stock_price
+    port_price -= corp.info.stock_price*corp.stock_count
 
     sector_f = Sector.objects.filter(sector_name=sector_name)
     port_f = Myport.objects.filter(portname=portname)
@@ -230,35 +252,16 @@ def add_count(request):
     return redirect('port')
 
 
-def sector_update():
-    sector_g = Sector.objects.get(pk=sector_pk)
-    sector_corps = Mycorp.objects.filter(sector=sector_g)
-
-    sector_price = 0
-    for corp in sector_corps:
-        sector_price += corp.total_price
-    
-    sector_f = Sector.objects.filter(pk=sector_pk)
-    sector_f.update(sector_price=sector_price)
-
-
-
-
-
-@login_required
-def test(request):
-    form = TestForm()
+def signup(request):
     if request.method == 'POST':
-        # print(request.POST)
-        user = request.user
-
-        portname = request.POST.get('portname')
-        port = Myport.objects.get(username=user, portname=portname)
-
-        sector_name = request.POST.get('sector_name')
-        sector = Sector.objects.get(username=user, sector_name=sector_name)
-
-        stock_name = request.POST.get('stock_name')
-        Mycorp.objects.filter(username=user, port=port, sector=sector,stock_name=stock_name).delete()
-    return render(request, 'portfolio/test.html', {"form":form})
-
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('')
+    else:
+        form = UserCreationForm()
+    return render(request, 'portfolio/signup.html', {'form':form})

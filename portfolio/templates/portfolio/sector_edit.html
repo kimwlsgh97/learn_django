@@ -1,11 +1,15 @@
 {% extends 'portfolio/index.html' %}
 {% block content %}
-   <h1>새로운 종목</h1>
-   <form method="post" class="sector-form">
+    {% if edit %}
+        <h1>새로운 종목</h1>
+    {% else %}
+        <h1>종목 수정</h1>
+    {% endif %}
+    <form method="post" class="sector-form">
        {% csrf_token %}
        <div class="sector-form-info">
         {{form.as_p}}
        </div>
        <button type="submit" class="save btn btn-default">저장</button>
-   </form> 
+    </form> 
 {% endblock %}

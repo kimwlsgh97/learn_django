@@ -16,7 +16,7 @@
         <div class="page-header">
             {% if user.is_authenticated %}
                 <div class="header-left">
-                    <h1><a href="/">PoPol <span class='glyphicon glyphicon-heart'></span></a></h1>
+                    <h1><a href="/">PoPol</a></h1>
                     <form action="{% url 'corp_search' %}" method="post" class="search_form">
                         {% csrf_token %}
                         <input type="search" name="corp_name" placeholder="회사 검색">
@@ -27,6 +27,7 @@
                     <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus">새글</span></a>
                     <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
                     <a href="{% url 'port' %}" class="top-menu">내 포트폴리오</a> 
+                    <a href="{% url 'logout' %}" class="top-menu">로그아웃</a>  
                 </div>                
             {% else %}
                 <div class="header-left">
@@ -34,6 +35,7 @@
                 </div>
                 <div class="header-right">
                     <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a> 
+                    <a href="{% url 'signup' %}" class="top-menu">회원가입</a> 
                 </div>
             {% endif %}
         </div>

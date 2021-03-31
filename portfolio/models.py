@@ -45,8 +45,8 @@ class Myport(models.Model):
 class Sector(models.Model):
     username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     port = models.ForeignKey('portfolio.Myport', on_delete=models.CASCADE, related_name='sectors')
-    sector_name = models.CharField(blank=True, null=True, max_length=200)
-    sector_per = models.IntegerField(blank=True, null=True)
+    sector_name = models.CharField(null=True, max_length=200)
+    sector_per = models.IntegerField(null=True)
     sector_price = models.IntegerField(default=0)
 
     def __str__(self):

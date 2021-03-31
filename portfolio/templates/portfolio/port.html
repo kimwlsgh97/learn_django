@@ -4,23 +4,26 @@
     <div class="ports">
         <div class="title_bar">
             <div class="title">나의 포트폴리오</div>
-            <a href="{% url 'port_new' %}" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></a>
+            <a href="{% url 'port_new' %}" class="btn btn-default"><span class="glyphicon glyphicon-plus">만들기</span></a>
         </div>
-        
         {% for port in all_ports %}
             <div class="all_port">
                 <div class="port_header">
                     <div class="port_name">{{port.portname}} ({{port.port_price}})</div>
-                    <a href="{% url 'port_remove' pk=port.pk %}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></a> 
+                    <div class="right-box">
+                        <a href="{% url 'sector_new' pk=port.pk %}" class="btn btn-default btn_sector_add"><span class="glyphicon glyphicon-plus">종목</span></a>
+                        <a href="{% url 'port_remove' pk=port.pk %}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></a> 
+                    </div>
                 </div>
-                <a href="{% url 'sector_new' pk=port.pk %}" class="btn btn-default btn_sector_add"><span class="glyphicon glyphicon-plus">종목 추가</span></a>
+
                 <div class="sector">
                     {% for sector in port.sectors.all %}
                         <div class="sector_bar">
                             <div class="sector_name">{{sector.sector_name}}</div>
                             <div class="sector_price">(종목금액 : {{sector.sector_price}}</div>
                             <div class="pre_per">목표비중 : {{sector.sector_per}}%</div>
-                            <div class="pre_per">현재비중 : )</div>
+                            <div class="pre_per">현재비중 : {{sector.sector_price|int_div:port.port_price}}%)</div>
+                            <a href="{% url 'sector_edit' pk=sector.pk %}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></a> 
                             <a href="{% url 'sector_remove' pk=sector.pk %}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></a> 
                         </div>
                         <div class="sector_corps">
@@ -45,7 +48,7 @@
                                         <a href="{% url 'corp_remove' pk=corp.pk %}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></a>
                                     </div>
                                     <div class="right-box">
-                                        <p>투자금 : {{corp.total_price}}</p>
+                                        <h4>투자금 : {{corp.total_price}}</h4>
                                     </div>
                                                                    
                                 </div>

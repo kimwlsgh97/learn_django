@@ -27,10 +27,13 @@
                 
                 </form>
             {% else %}
-                <p>회사가 없음</p>
+                <div class="not_search">
+                    <p>포트폴리오가 없습니다</p>
+                    <a href="{% url 'port' %}" class="btn btn-default">만들기</a>       
+                </div>
             {% endif %}
         </div>
     {% empty %}
-        <p>검색 결과가 없습니당</p>
+        <p>검색 결과가 없습니다</p>
     {% endfor %}
 {% endblock %}
