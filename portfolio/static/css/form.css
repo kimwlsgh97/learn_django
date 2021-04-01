@@ -1,0 +1,25 @@
+.login_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-ob {
+    margin-bottom: 10px;
+}
+
+.login_title {
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.login_btn {
+    background-color: #0071e3;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    padding: 5px 10px 5px 10px;
+    
+}

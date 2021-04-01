@@ -1,41 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Syne+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap');
+@import url('./reset.css');
 @import url('./port.css');
 @import url('./post.css');
 @import url('./corp_search.css');
+@import url('./form.css');
+@import url('./container.css');
+
+html, body {
+    width: 100%;
+    height: 90%;
+}
 
 body {
-    font-family: 'Do Hyeon', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
+    background-color: #F2F2F2;
 }
 
 .container , .row , .col-md-9, .port, .all_port{
     width: 100%;
+    height: 100%;
 }
 
-.page-header {
-    background-color: #ff9400;
-    margin-top: 0;
-    padding: 20px 20px 20px 40px;
+.row {
     display:flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
+.page-header {
+    background-color: #FFFFFF;
+    margin-top: 0;
+    padding: 0 20px 0 40px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-    color: #ffffff;
+    background-color: #333333;
+}
+
+.top-menu, .top-menu:hover, .top-menu:visited {
+    color: #333333;;
+    float: right;
+    font-size: 15px;
+    margin-right: 20px;
+}
+
+.main_title{
+    color: #333333;
+    font-size: 16px;
 }
 
 .search_form {
     display:flex;
 }
 
-.search {
+.search_btn{
     margin-left: 10px;
+    background-color: #F2F2F2;
+    border:none;
 }
 
 .btn {
     margin-left: 10px;
-    margin-right: 10px;
+    color: #333333;
 }
 
 .save {

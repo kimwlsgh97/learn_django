@@ -37,6 +37,7 @@ class Myport(models.Model):
     username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     portname = models.CharField(blank=True, null=True, max_length=200)
     port_price = models.IntegerField(default=0)
+    cash_price = models.IntegerField(default=0)
     created_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
