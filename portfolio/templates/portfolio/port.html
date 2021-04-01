@@ -12,13 +12,20 @@
                     <div class="port_name">{{port.portname}} ({{port.port_price}})</div>
                     <div class="right-box">
                         <a href="{% url 'sector_new' pk=port.pk %}" class="btn btn_sector_add">종목 <span class="glyphicon glyphicon-plus"></span></a>
+                        <a href="{% url 'port_edit' pk=port.pk %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
                         <a href="{% url 'port_remove' pk=port.pk %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a> 
                     </div>
                 </div>
 
                 <div class="sector">
-                    <div class="cash_price">현금 : {{port.cash_price}}</div>
-                    {% for sector in port.sectors.all %}
+                    <div class="cash_bar">
+                        <div class="cash_name">현금</div>
+                        <div class="cash_price">(보유금액 : {{port.cash_price}}</div>
+                        <div class="cash_price">목표비중 : {{port.cash_per}}%</div>
+                        <div class="cash_price">현재비중 : {{port.cash_price|int_div:port.port_price}}%)</div>
+                        <a href="{% url 'cash_edit' pk=port.pk %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
+                    </div>
+                   {% for sector in port.sectors.all %}
                         <div class="sector_bar">
                             <div class="sector_name">{{sector.sector_name}}</div>
                             <div class="sector_price">(종목금액 : {{sector.sector_price}}</div>
@@ -62,7 +69,7 @@
                         {% if not n_corp.sector %}
                             <div class="port_corp_n">
                                 <div class="stock_name">{{n_corp}}</div>
-                                <form action="{% url 'add_corp_to_sector' pk=n_corp.pk%}" method="post" class="form port_form">
+                                <form action="{% url 'add_corp_to_sector' pk=n_corp.pk%}" method="post" class="none_form">
                                     {% csrf_token %}
                                     <select name="sector" id="sectors">
                                         {% for sector in port.sectors.all %}
@@ -71,7 +78,7 @@
                                     </select>
                                     <button type="submit" class="btn btn-default">분류</button>
                                 </form>
-                                <a href="{% url 'corp_remove' pk=n_corp.pk %}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></a>
+                                <a href="{% url 'corp_remove' pk=n_corp.pk %}" class="btn"><span class="glyphicon glyphicon-remove"></span></a>
 
                             </div>
                         {% endif %}

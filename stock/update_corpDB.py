@@ -56,7 +56,7 @@ def update():
 # corp db에 저장
 def inputDB(now):
     # krx 사용 df 정보 스크랩
-    df, tickers, names = useKrx(now,"KOSPI")
+    df, tickers, names = useKrx(now,"all")
 
     # test.sqlite3 DB연결
     con, cur = useDB("corp.sqlite3")
@@ -80,16 +80,53 @@ def useKrx(now, market):
 
     print(now,"날짜의", market, "데이터를 가져옵니다.")
     # 티커 가져옴
-    tickers = stock.get_market_ticker_list(now, market=market)
-    for ticker in tickers:
-        # 이름 가져옴
-        names.append(stock.get_market_ticker_name(ticker))
 
-    # 주가 가져옴
-    df = stock.get_market_ohlcv_by_ticker(now)
+    if market=="KOSPI":
+        tickers = stock.get_market_ticker_list(now,"KOSPI")
+        for ticker in tickers:
+            names.append(stock.get_market_ticker_name(ticker))
+        df = stock.get_market_ohlcv_by_ticker(now)
+        return df, tickers, names
 
-    # 주가, 회사이름 반환
-    return df, tickers, names
+    elif market=="KOSDAQ":
+        # con, cur = useDB("test.sqlite")
+        # cur.execute("CREATE TABLE test(id int PRIMARY KEY, name varchar(20));")
+
+        tickers2 = stock.get_market_ticker_list(now, "KOSDAQ")
+        for ticker2 in tickers2:
+            names.append(stock.get_market_ticker_name(ticker2))
+   
+        # for name in names:    
+        #     cur.execute("INSERT INTO test(name) VALUES (?)",(name,))
+        #     print(name)
+        
+        # con.commit()
+            
+        df = stock.get_market_ohlcv_by_ticker(now, "KOSDAQ")
+        
+        
+        return df, tickers2, names
+
+    else:
+        tickers = stock.get_market_ticker_list(now,"KOSPI")
+        for ticker in tickers:
+            names.append(stock.get_market_ticker_name(ticker))
+
+        tickers2 = stock.get_market_ticker_list(now, "KOSDAQ")
+        for ticker2 in tickers2:
+            names.append(stock.get_market_ticker_name(ticker2))
+            tickers.append(ticker2)
+
+        df1 = stock.get_market_ohlcv_by_ticker(now, "KOSPI")
+        df2 = stock.get_market_ohlcv_by_ticker(now, "KOSDAQ")
+
+        df = pd.concat([df1,df2])
+        return df, tickers, names
+
+    
+    
+
+    
 
 
 # db접속 함수
@@ -103,6 +140,12 @@ def useDB(path):
 def alterDB(con, cur):
     # 회사이름 DB에 추가
     cur.execute("ALTER TABLE corp ADD 이름 varchar(20);")
+    con.commit()
+
+
+def toSql(df):
+    con, cur = useDB('test.sqlite')
+    df.to_sql('test', con)
     con.commit()
 
 # 이 함수로 불려졌을때 실행

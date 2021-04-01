@@ -1,21 +1,43 @@
-.login_form, .sector_form {
+.login_form, 
+.sector_form,
+.port_form,
+.cash_form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.login-ob, .sector-ob {
-    width: 200px;
+.login-ob, 
+.sector-ob, 
+.port-ob,
+.cash-ob{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
     margin-bottom: 10px;
 }
 
-.login_title, .sector_title {
+.login-ob input,
+.sector-ob input,
+.port-ob input,
+.cash-ob input {
+    width: 200px;
+    margin: 10px 0 10px 0;
+}
+
+.login_title, 
+.sector_title,
+.port_title,
+.cash_title {
     margin-bottom: 15px;
     font-size: 24px;
 }
 
-.login_btn, .sector_btn {
+.login_btn,
+.sector_btn,
+.port_btn {
     background-color: #0071e3;
     color: #ffffff;
     border: none;
@@ -23,4 +45,8 @@
     width: 200px;
     padding: 5px 10px 5px 10px;
     
+}
+
+.none_form {
+    display: flex;
 }

@@ -8,15 +8,11 @@
 .all_port {
     border-radius:20px;
     margin-bottom: 20px;
+    border: 1px solid gray;
 }
 
 .all_port div{
     margin-bottom: 10px;
-}
-
-.port_title{
-    color: #333333;
-    font-size: 40px;
 }
 
 .port_header {
@@ -44,11 +40,6 @@
     align-items: center;
 }
 
-
-.all_port {
-    border: 1px solid gray;
-}
-
 .port_name {
     font-size: 30px;
 }
@@ -59,18 +50,20 @@
 }
 
 
-.sector_bar {
+.sector_bar, .cash_bar {
     display: flex;
     align-items: center;
     margin-top:10px;
     border-bottom: 1px solid gray;
 }
 
-.sector_bar div{
+.sector_bar div,
+.cash_bar div{
     margin-right: 10px;
 }
 
-.sector_name{
+.sector_name,
+.cash_name{
     font-size: 25px;
     margin-right:20px;
 }
@@ -81,6 +74,9 @@
 }
 
 .main_info {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
     padding: 0 10px 0 10px;
     border: 1px solid #0071e3;
 }
@@ -88,6 +84,7 @@
 .stock_name {
     color:#0071e3;
     font-size: 20px;
+    margin: 0 10px 0 10px;
 }
 
 

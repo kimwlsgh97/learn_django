@@ -1,38 +1,39 @@
 {% extends 'portfolio/index.html' %}
 {% block content %}
-    {% for corp in corps %}
-        <div class="corp_search">
-
-            <div class="search_info">
-                <h1>{{corp.stock_name}}</h1>
-                <h4>주가 : {{corp.stock_price|linebreaksbr}}원</h4>
-            </div>
-            
-            {% if ports %}
-                <form action="{% url 'port' %}" method="post" class="search_form">
-                    {% csrf_token %}
-                    <div class="box">
-                        <label for="ports" class="search_label">포트폴리오에 추가</label>
-                        <select name="port" id="ports">
-                            {% for port in ports %}
-                                <option value="{{port.portname}}">{{port.portname}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <input type="hidden" name="stock_name" value="{{corp.stock_name}}">
-                    <input type="hidden" name="stock_code" value="{{corp.stock_code}}">
-                    <button type="submit" class="btn btn-default">추가</button>
-                
-                </form>
-            {% else %}
-                <div class="not_search">
-                    <p>포트폴리오가 없습니다</p>
-                    <a href="{% url 'port' %}" class="btn btn-default">만들기</a>       
+    <div class="search-con">
+        {% for corp in corps %}
+            <div class="search_corp">
+                <div class="search_info">
+                    <h1>{{corp.stock_name}}</h1>
+                    <h4>주가 : {{corp.stock_price|linebreaksbr}}원</h4>
                 </div>
-            {% endif %}
-        </div>
-    {% empty %}
-        <p>검색 결과가 없습니다</p>
-    {% endfor %}
+                
+                {% if ports %}
+                    <form action="{% url 'port' %}" method="post" class="search_form">
+                        {% csrf_token %}
+                        <div class="box">
+                            <label for="ports" class="search_label">포트폴리오에 추가</label>
+                            <select name="port" id="ports">
+                                {% for port in ports %}
+                                    <option value="{{port.portname}}">{{port.portname}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <input type="hidden" name="stock_name" value="{{corp.stock_name}}">
+                        <input type="hidden" name="stock_code" value="{{corp.stock_code}}">
+                        <button type="submit" class="btn btn-default">추가</button>
+                    
+                    </form>
+                {% else %}
+                    <div class="not_search">
+                        <p>포트폴리오가 없습니다</p>
+                        <a href="{% url 'port' %}" class="btn btn-default">만들기</a>       
+                    </div>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>검색 결과가 없습니다</p>
+        {% endfor %}
+    </div>
 {% endblock %}

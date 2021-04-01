@@ -31,9 +31,11 @@ class MyportForm(forms.ModelForm):
 
     class Meta:
         model = Myport
-        fields = ('portname',)
+        fields = ('portname', 'cash_price', 'cash_per')
         labels = {
-            "portname":"이름"
+            "portname":"이름",
+            'cash_price': '보유금액',
+            'cash_per':'목표 현금 비중'
         }
 
 

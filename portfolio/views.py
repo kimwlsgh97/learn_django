@@ -20,70 +20,6 @@ from .forms import PostForm, CommentForm, MyportForm, SectorForm, TestForm
 # def index(request):
 #     return HttpResponse("Hello, world. You're at the port index>")
 
-def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-    return render(request, 'portfolio/post_list.html', {'posts':posts})
-
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'portfolio/post_detail.html', {'post':post})
-
-@login_required
-def post_new(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = PostForm()
-    return render(request, 'portfolio/post_edit.html', {'form':form})
-
-@login_required
-def post_edit(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        form = PostForm(request.POST ,instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = PostForm(instance=post)
-    return render(request, 'portfolio/post_edit.html', {'form':form})
-
-@login_required
-def post_draft_list(request):
-    posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
-    return render(request, 'portfolio/post_draft_list.html', {'posts':posts})
-
-@login_required
-def post_publish(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    post.publish()
-    return redirect('post_detail', pk=pk)
-
-@login_required
-def post_remove(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    post.delete()
-    return redirect('post_list')
-
-def add_comment_to_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method =="POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = post
-            comment.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = CommentForm()
-    return render(request, 'portfolio/add_comment_to_post.html', {'form':form})
 
 def corp_search(request):
     if request.method == 'POST':
@@ -122,21 +58,43 @@ def port(request):
 @login_required
 def port_new(request):
     if request.method == "POST":
-        form = MyportForm(request.POST)
-        if form.is_valid():
-            port = form.save(commit=False)
-            port.username = request.user
-            port.save()
-            return redirect('port')
-    else:
-        form = MyportForm()
-    return render(request, 'portfolio/port_new.html', {'form':form})
+        portname = request.POST.get('portname')
+        cash_price = request.POST.get('cash_price')
+        cash_per = request.POST.get('cash_per')
+        Myport.objects.create(username=request.user, portname=portname, port_price=cash_price, cash_price=cash_price, cash_per=cash_per)
+        return redirect('port')
+    return render(request, 'portfolio/port_new.html')
+
+@login_required
+def port_edit(request, pk):
+    edit = True
+    port_g = get_object_or_404(Myport, pk=pk)
+    if request.method == "POST":
+        port_f = Myport.objects.filter(pk=pk)
+        portname = request.POST.get('portname')
+        cash_price = request.POST.get('cash_price')
+        cash_per = request.POST.get('cash_per')
+
+        intCash = int(cash_price)
+
+        port_price = port_g.port_price - port_g.cash_price + intCash
+
+        port_f.update(portname=portname, port_price=port_price, cash_price=cash_price, cash_per=cash_per)
+        return redirect('port')
+        
+
+    return render(request, 'portfolio/port_edit.html', {'port':port_g, 'edit':edit})
 
 @login_required
 def port_remove(request, pk):
     port = get_object_or_404(Myport, pk=pk)
     port.delete()
     return redirect('port')
+
+
+
+
+
 
 @login_required
 def sector_new(request, pk):
@@ -166,12 +124,23 @@ def sector_edit(request, pk):
         form = SectorForm(instance=sector)
     return render(request, 'portfolio/sector_edit.html', {'form':form, 'port':port, 'edit':edit})
 
-
 @login_required
 def sector_remove(request,pk):
     sector = get_object_or_404(Sector, pk=pk)
+    
+    port = Myport.objects.filter(sectors=sector)
+    port_g = Myport.objects.get(sectors=sector)
+
+    sector_price = sector.sector_price
+    port_price = port_g.port_price
+
+    result = port_price - sector_price
+
+    port.update(port_price=result)
+
     sector.delete()
     return redirect('port')
+
 
 @login_required
 def add_corp_to_sector(request, pk):
@@ -215,7 +184,7 @@ def add_count(request):
         price = request.POST.get('stock_price')
         
         # corp = get_object_or_404(Mycorp, pk=pk)
-        total_price = int(price) * int(count)     
+        total_price = int(price) * int(count)
         corp = Mycorp.objects.filter(pk=corp_pk)
         corp.update(stock_count=count, total_price=total_price)
 
@@ -248,6 +217,9 @@ def add_count(request):
         
         
     return redirect('port')
+
+
+
 
 
 def signup(request):

@@ -38,6 +38,7 @@ class Myport(models.Model):
     portname = models.CharField(blank=True, null=True, max_length=200)
     port_price = models.IntegerField(default=0)
     cash_price = models.IntegerField(default=0)
+    cash_per = models.IntegerField(default=0)
     created_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
