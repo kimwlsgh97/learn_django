@@ -16,7 +16,7 @@
         <div class="page-header">
             {% if user.is_authenticated %}
                 <div class="header-left">
-                    <a href="/"></a><span class=main_title>Pd</span></a>
+                    <a href="/"><span class=main_title>Pd</span></a>
                 </div>
                 <form action="{% url 'corp_search' %}" method="post" class="search_form">
                     {% csrf_token %}
@@ -25,11 +25,11 @@
                 </form> 
                 <div class="header-right">
                  
-                    <a href="{% url 'logout' %}" class="top-menu">로그아웃</a>  
+                    <a href="{% url 'logout' %}" class="logout_btn">로그아웃</a>  
                 </div>                
             {% else %}
                 <div class="header-left">
-                    <a href="/"><span class='main_title'>Pd</span></a></h1>
+                    <a href="/"><span class='main_title'>Pd</span></a>
                 </div>
                 <div class="header-right">
                     <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a> 

@@ -100,20 +100,21 @@ def port(request):
     port_corp = Mycorp.objects.all()
 
     if request.method == 'POST':
-        
+        print(request.POST)
         # 회사 추가 기능
         stock_name = request.POST.get('stock_name')
         if stock_name:
             user = request.user
             stock_code = request.POST.get('stock_code')
-
             portname = request.POST.get('port')
+
             port = Myport.objects.get(username=user, portname=portname)
 
-            info = Corp.objects.get(stock_name=stock_name)
+            info = Corp.objects.get(stock_code=stock_code)
 
-            result = Mycorp.objects.filter(username=user, port=port, stock_name=stock_name)
+            result = Mycorp.objects.filter(username=user, port=port, stock_code=stock_code)
             if not result:
+                # 내 회사 추가
                 Mycorp.objects.create(username=user, port=port, stock_name=stock_name, stock_code=stock_code, info=info)
         
     return render(request,'portfolio/port.html', {"all_ports":all_ports, "sectors":sectors})
@@ -188,21 +189,18 @@ def corp_remove(request,pk):
     corp = get_object_or_404(Mycorp, pk=pk)
 
     sector_name = corp.sector
-    portname = corp.port
+    if(sector_name):
+        sector_g = Sector.objects.get(sector_name=sector_name)
+        sector_price = sector_g.sector_price
+        sector_price -= corp.info.stock_price*corp.stock_count
+        sector_f = Sector.objects.filter(sector_name=sector_name)
+        sector_f.update(sector_price=sector_price)
 
-    sector_g = Sector.objects.get(sector_name=sector_name)
+    portname = corp.port    
     port_g = Myport.objects.get(portname=portname)
-    
-    sector_price = sector_g.sector_price
-    sector_price -= corp.info.stock_price*corp.stock_count
-
     port_price = port_g.port_price
     port_price -= corp.info.stock_price*corp.stock_count
-
-    sector_f = Sector.objects.filter(sector_name=sector_name)
     port_f = Myport.objects.filter(portname=portname)
-
-    sector_f.update(sector_price=sector_price)
     port_f.update(port_price=port_price)
     corp.delete()
     return redirect('port')

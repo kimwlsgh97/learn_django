@@ -100,7 +100,7 @@
     margin: 0 10px 0 10px;
 }
 
-.port-form, .sector_form {
+.port-form {
     display: flex;
     align-items: center;
 }
