@@ -30,11 +30,11 @@
                     <div class="ports">
                         <div class="title_bar">
                             <div class="port_title">Portfolio</div>
-                            <a href="{% url 'login' %}" class="btn make_btn">만들기 <span class="glyphicon glyphicon-plus"></span></a>
+                            <a href="{% url 'login' %}" class="btn make_btn">PoPol<span class="glyphicon glyphicon-plus"></span></a>
                         </div>
                         <div class="all_port">
                             <div class="port_header">
-                                <div class="port_name">내 포트폴리오 (848,000)</div>
+                                <div class="port_name">내 포트폴리오 (2,230,600)</div>
                                 <div class="right-box">
                                     <a href="{% url 'login' %}" class="btn btn_sector_add">종목 <span class="glyphicon glyphicon-plus"></span></a>
                                     <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
@@ -47,14 +47,14 @@
                                     <div class="cash_name">현금</div>
                                     <div class="cash_price">(보유금액 : 20,000,000</div>
                                     <div class="cash_price">목표비중 : 20%</div>
-                                    <div class="cash_price">현재비중 : %)</div>
+                                    <div class="cash_price">현재비중 : 89.7%)</div>
                                     <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
                                 </div>
                                 <div class="sector_bar">
                                     <div class="sector_name">반도체</div>
-                                    <div class="sector_price">(종목금액 : 원</div>
+                                    <div class="sector_price">(종목금액 : 296,000</div>
                                     <div class="pre_per">목표비중 : 30%</div>
-                                    <div class="pre_per">현재비중 : %)</div>
+                                    <div class="pre_per">현재비중 : 1.3%)</div>
                                     <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
                                     <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a> 
                                 </div>
@@ -62,11 +62,11 @@
                                         <div class="corp">
                                             <div class="left-box">
                                                 <div class="main_info">
-                                                    <div class="info stock_name">삼성전자</div>
-                                                    <div class="info stock_price">원</div>
+                                                    <div class="info stock_name">삼성전자우</div>
+                                                    <div class="info stock_price">73,600 원</div>
                                                 </div>
                                                 <form action="{% url 'login' %}">
-                                                    <label for="count">주식수 : </label>
+                                                    <label for="count">주식수 : 4</label>
                                                     <input type="number" name="stock_count" id="count" value="3">
                                                     <button type="submit" class="btn btn-default">계산</button>
                                                 </form>
@@ -74,16 +74,16 @@
                                                 <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a>
                                             </div>
                                             <div class="right-box">
-                                                <h4>투자금 : 원</h4>
+                                                <h4>투자금 : 296,000원</h4>
                                             </div>
                                                                         
                                         </div>
                                 </div>
                                 <div class="sector_bar">
-                                    <div class="sector_name">반도체</div>
-                                    <div class="sector_price">(종목금액 : 원</div>
+                                    <div class="sector_name">전기차</div>
+                                    <div class="sector_price">(종목금액 : 2,010,000원</div>
                                     <div class="pre_per">목표비중 : 30%</div>
-                                    <div class="pre_per">현재비중 : %)</div>
+                                    <div class="pre_per">현재비중 : 9.0%)</div>
                                     <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
                                     <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a> 
                                 </div>
@@ -91,11 +91,11 @@
                                         <div class="corp">
                                             <div class="left-box">
                                                 <div class="main_info">
-                                                    <div class="info stock_name">삼성전자</div>
-                                                    <div class="info stock_price">원</div>
+                                                    <div class="info stock_name">현대차우</div>
+                                                    <div class="info stock_price">100,500원</div>
                                                 </div>
                                                 <form action="{% url 'login' %}">
-                                                    <label for="count">주식수 : </label>
+                                                    <label for="count">주식수 : 20</label>
                                                     <input type="number" name="stock_count" id="count" value="3">
                                                     <button type="submit" class="btn btn-default">계산</button>
                                                 </form>
@@ -103,7 +103,7 @@
                                                 <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a>
                                             </div>
                                             <div class="right-box">
-                                                <h4>투자금 : 원</h4>
+                                                <h4>투자금 : 2,010,000원</h4>
                                             </div>
                                                                         
                                         </div>
@@ -112,7 +112,7 @@
                             
                             <div class="none_corp">
                                 <div class="port_corp_n">
-                                    <div class="stock_name">기아차</div>
+                                    <div class="stock_name">SK하이닉스</div>
                                     <form action="{% url 'login' %}" method="post" class="none_form">
                                         <select name="sector" id="sectors">
                                             <option value="전기차">전기차</option>
