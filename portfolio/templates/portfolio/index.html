@@ -16,7 +16,7 @@
         <div class="page-header">
             {% if user.is_authenticated %}
                 <div class="header-left">
-                    <a href="/"><span class=main_title>Pd</span></a>
+                    <a href="/port/"><span class=main_title>Pd</span></a>
                 </div>
                 <form action="{% url 'corp_search' %}" method="post" class="search_form">
                     {% csrf_token %}

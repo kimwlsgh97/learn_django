@@ -1,11 +1,18 @@
 .login_form, 
 .sector_form,
 .port_form,
-.cash_form {
+.cash_form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.signup_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .login-ob, 
@@ -37,7 +44,8 @@
 
 .login_btn,
 .sector_btn,
-.port_btn {
+.port_btn,
+.signup_btn {
     background-color: #0071e3;
     color: #ffffff;
     border: none;
@@ -49,4 +57,14 @@
 
 .none_form {
     display: flex;
+}
+
+.signup_form p{
+    display:flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.signup_btn {
+    margin-left: 90px;
 }

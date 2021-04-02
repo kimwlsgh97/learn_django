@@ -1,11 +1,11 @@
 {% extends 'portfolio/index.html' %}
 {% block content %}
     <div class="signup-con">
-        <h2>Sign Up</h2>
-        <form method="post">
+        <h2>회원 가입</h2>
+        <form method="post" class="signup_form">
             {% csrf_token %}
             {{form.as_p}}
-            <button type="submit">Sign Up</button>
+            <button type="submit" class="signup_btn">회원가입</button>
         </form> 
     </div>
 {% endblock %}

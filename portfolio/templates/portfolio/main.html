@@ -1,10 +1,41 @@
-{% extends 'portfolio/index.html' %}
 {% load custom_tags %}
-{% block content %}
-    <div class="ports">
-        <div class="title_bar">
-            <div class="port_title">Portfolio</div>
-            <a href="{% url 'login' %}" class="btn make_btn">만들기 <span class="glyphicon glyphicon-plus"></span></a>
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoPol</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+<body>
+    <body>
+        <div class="page-header">
+            <div class="header-left">
+                <a href="/"><span class='main_title'>Pd</span></a>
+            </div>
+            <div class="header-right">
+                <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a> 
+                <a href="{% url 'signup' %}" class="top-menu">회원가입</a> 
+            </div>
         </div>
-    </div>
-{% endblock %}
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="ports">
+                        <div class="title_bar">
+                            <div class="port_title">Portfolio</div>
+                            <a href="{% url 'login' %}" class="btn make_btn">만들기 <span class="glyphicon glyphicon-plus"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</body>
+</html>
