@@ -3,24 +3,24 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PoPol</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PoPol</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+    </head>
     <body>
         <div class="page-header">
             <div class="header-left">
                 <a href="/"><span class='main_title'>Pd</span></a>
             </div>
+            
             <div class="header-right">
-                <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a> 
+                <a href="{% url 'login' %}" class="top-menu">로그인</a> 
                 <a href="{% url 'signup' %}" class="top-menu">회원가입</a> 
             </div>
         </div>
@@ -32,10 +32,101 @@
                             <div class="port_title">Portfolio</div>
                             <a href="{% url 'login' %}" class="btn make_btn">만들기 <span class="glyphicon glyphicon-plus"></span></a>
                         </div>
+                        <div class="all_port">
+                            <div class="port_header">
+                                <div class="port_name">내 포트폴리오 (848,000)</div>
+                                <div class="right-box">
+                                    <a href="{% url 'login' %}" class="btn btn_sector_add">종목 <span class="glyphicon glyphicon-plus"></span></a>
+                                    <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
+                                    <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a> 
+                                </div>
+                            </div>
+
+                            <div class="sector">
+                                <div class="cash_bar">
+                                    <div class="cash_name">현금</div>
+                                    <div class="cash_price">(보유금액 : 20,000,000</div>
+                                    <div class="cash_price">목표비중 : 20%</div>
+                                    <div class="cash_price">현재비중 : %)</div>
+                                    <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
+                                </div>
+                                <div class="sector_bar">
+                                    <div class="sector_name">반도체</div>
+                                    <div class="sector_price">(종목금액 : 원</div>
+                                    <div class="pre_per">목표비중 : 30%</div>
+                                    <div class="pre_per">현재비중 : %)</div>
+                                    <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
+                                    <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a> 
+                                </div>
+                                <div class="sector_corps">
+                                        <div class="corp">
+                                            <div class="left-box">
+                                                <div class="main_info">
+                                                    <div class="info stock_name">삼성전자</div>
+                                                    <div class="info stock_price">원</div>
+                                                </div>
+                                                <form action="{% url 'login' %}">
+                                                    <label for="count">주식수 : </label>
+                                                    <input type="number" name="stock_count" id="count" value="3">
+                                                    <button type="submit" class="btn btn-default">계산</button>
+                                                </form>
+
+                                                <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a>
+                                            </div>
+                                            <div class="right-box">
+                                                <h4>투자금 : 원</h4>
+                                            </div>
+                                                                        
+                                        </div>
+                                </div>
+                                <div class="sector_bar">
+                                    <div class="sector_name">반도체</div>
+                                    <div class="sector_price">(종목금액 : 원</div>
+                                    <div class="pre_per">목표비중 : 30%</div>
+                                    <div class="pre_per">현재비중 : %)</div>
+                                    <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
+                                    <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a> 
+                                </div>
+                                <div class="sector_corps">
+                                        <div class="corp">
+                                            <div class="left-box">
+                                                <div class="main_info">
+                                                    <div class="info stock_name">삼성전자</div>
+                                                    <div class="info stock_price">원</div>
+                                                </div>
+                                                <form action="{% url 'login' %}">
+                                                    <label for="count">주식수 : </label>
+                                                    <input type="number" name="stock_count" id="count" value="3">
+                                                    <button type="submit" class="btn btn-default">계산</button>
+                                                </form>
+
+                                                <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a>
+                                            </div>
+                                            <div class="right-box">
+                                                <h4>투자금 : 원</h4>
+                                            </div>
+                                                                        
+                                        </div>
+                                </div>
+                            </div>
+                            
+                            <div class="none_corp">
+                                <div class="port_corp_n">
+                                    <div class="stock_name">기아차</div>
+                                    <form action="{% url 'login' %}" method="post" class="none_form">
+                                        <select name="sector" id="sectors">
+                                            <option value="전기차">전기차</option>
+                                            <option value="반도체">반도체</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-default">분류</button>
+                                    </form>
+                                    <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-remove"></span></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </body>
-</body>
 </html>
