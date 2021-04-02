@@ -17,3 +17,7 @@ def int_div(low, high):
     except:
         result = 0
     return result
+
+@register.filter
+def for_cash(num):
+    return format(num, ",")
