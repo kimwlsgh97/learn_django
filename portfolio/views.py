@@ -21,6 +21,9 @@ from .forms import PostForm, CommentForm, MyportForm, SectorForm, CashForm
 #     return HttpResponse("Hello, world. You're at the port index>")
 
 
+def main(request):
+    return render(request, 'portfolio/main.html')
+
 def corp_search(request):
     if request.method == 'POST':
         corp_name = request.POST.get('corp_name') # POST 요청 확인
@@ -28,8 +31,9 @@ def corp_search(request):
             corps = Corp.objects.filter(stock_name__contains=corp_name) #회사 리스트 가져옴
             ports = Myport.objects.filter(username=request.user) # 내 포트폴리오 목록 불러옴
     return render(request, 'portfolio/corp_search.html', {"corps":corps,"ports":ports}) # 검색 완료 화면 출력
-    
-@login_required
+
+
+@login_required    
 def port(request):
     all_ports = Myport.objects.filter(username=request.user)
     sectors = Sector.objects.all()

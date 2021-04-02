@@ -1,12 +1,11 @@
 {% extends 'portfolio/index.html' %}
 {% block content %}
-    {% if form.errors %}
-        <p>이름과 비밀번호가 일치하지 않습니다. 다시 시도해주세요.</p>
-    {% endif %}
+    <div class="signup-con">
         <h2>Sign Up</h2>
         <form method="post">
             {% csrf_token %}
             {{form.as_p}}
             <button type="submit">Sign Up</button>
         </form> 
+    </div>
 {% endblock %}

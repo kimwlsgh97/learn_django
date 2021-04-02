@@ -1,0 +1,10 @@
+{% extends 'portfolio/index.html' %}
+{% load custom_tags %}
+{% block content %}
+    <div class="ports">
+        <div class="title_bar">
+            <div class="port_title">Portfolio</div>
+            <a href="{% url 'login' %}" class="btn make_btn">만들기 <span class="glyphicon glyphicon-plus"></span></a>
+        </div>
+    </div>
+{% endblock %}
