@@ -228,8 +228,25 @@ def add_count(request):
         
     return redirect('port')
 
+@login_required
+def change_sector(request, pk):
+    corp_g = get_object_or_404(Mycorp,pk=pk)
+    if request.method == "POST":
+        form_sector = request.POST.get('sector')
+        pre_sector = Sector.objects.get(sector_name=corp_g.sector)
+        now_sector = Sector.objects.get(sector_name=form_sector)
 
+        pre_sector_price = pre_sector.sector_price - corp_g.total_price
+        now_sector_price = now_sector.sector_price + corp_g.total_price
 
+        p_sector = Sector.objects.filter(sector_name=corp_g.sector)
+        n_sector = Sector.objects.filter(sector_name=form_sector)
+        corp = Mycorp.objects.filter(pk=pk)
+
+        p_sector.update(sector_price=pre_sector_price)
+        n_sector.update(sector_price=now_sector_price)
+        corp.update(sector=now_sector)
+    return redirect('port') 
 
 
 def signup(request):

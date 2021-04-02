@@ -23,8 +23,9 @@ urlpatterns = [
     path('sector/<int:pk>/remove/', views.sector_remove, name='sector_remove'),
     path('sector/<int:pk>/edit/', views.sector_edit, name='sector_edit'),
 
-    path('corp/<int:pk>/remove', views.corp_remove, name='corp_remove'),
-    path('corp/add_count', views.add_count, name='add_count'),
+    path('corp/<int:pk>/remove/', views.corp_remove, name='corp_remove'),
+    path('corp/add_count/', views.add_count, name='add_count'),
+    path('corp/<int:pk>/change_sector/', views.change_sector, name='change_sector'),
 
     path('cash/<int:pk>/edit/', views.cash_edit, name='cash_edit'),
 ]

@@ -91,13 +91,3 @@
 .stock_count{
     margin: 10px;
 }
-
-
-.form{
-    margin: 0 10px 0 10px;
-}
-
-.port-form {
-    display: flex;
-    align-items: center;
-}

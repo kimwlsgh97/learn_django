@@ -28,3 +28,7 @@
     height: 370px;
     width: 300px;
 }
+
+.corp-con {
+    display: flex;
+}
