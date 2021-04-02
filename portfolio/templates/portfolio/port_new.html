@@ -5,20 +5,10 @@
         
         <form method="post" class="port_form">
             {% csrf_token %}
-                {% if not cash %}
-                    <div class="port-ob">
-                        <label>포트폴리오 이름</label>
-                        <input type="text" name="portname" required>
-                    </div>
-                {% endif %}
-                <div class="port-ob">
-                    <label>보유 금액</label>
-                    <input type="text" name="cash_price" required>
-                </div>
-                <div class="port-ob">
-                    <label>현금 목표 비중 (%)</label>
-                    <input type="text" name="cash_per" required>
-                </div>
+            <div class="port-ob">
+                {{form.portname.label}}
+                {{form.portname}}
+            </div>
             <button type="submit" class="port_btn">저장</button>
         </form> 
    </div>

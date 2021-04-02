@@ -1,0 +1,28 @@
+{% extends 'portfolio/index.html' %}
+{% block content %}
+    <div class="port-con">
+        {% if edit %}
+            <div class="port_title">포트폴리오 수정</div>
+        {% else %}
+            <div class="port_title">현금 비중</div>
+        {% endif %}
+        <form method="post" class="port_form">
+            {% csrf_token %}
+                {% if edit %}
+                    <div class="port-ob">
+                        <label>포트폴리오 이름</label>
+                        <input type="text" name="portname" value="{{port.portname}}" required>
+                    </div>
+                {% endif %}
+                <div class="port-ob">
+                    <label>현금 보유 금액</label>
+                    <input type="text" name="cash_price" value="{{port.cash_price}}" required>
+                </div>
+                <div class="port-ob">
+                    <label>현금 목표 비중(%)</label>
+                    <input type="text" name="cash_per" value="{{port.cash_per}}" required>
+                </div>
+            <button type="submit" class="port_btn">저장</button>
+        </form> 
+   </div>
+{% endblock %}

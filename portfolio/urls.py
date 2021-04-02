@@ -26,5 +26,5 @@ urlpatterns = [
     path('corp/<int:pk>/remove', views.corp_remove, name='corp_remove'),
     path('corp/add_count', views.add_count, name='add_count'),
 
-    path('cash/<int:pk>/edit/', views.port_edit, name='cash_edit'),
+    path('cash/<int:pk>/edit/', views.cash_edit, name='cash_edit'),
 ]

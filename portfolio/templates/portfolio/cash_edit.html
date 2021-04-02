@@ -1,12 +1,18 @@
 {% extends 'portfolio/index.html' %}
 {% block content %}
-    <div class="cash-con">
-        <div class="cash_title">현금 비중</div>
-        <form method="post" class="cash_form">
+    <div class="port-con">
+        <div class="port_title">현금 비중 수정</div>
+        <form method="post" class="port_form">
             {% csrf_token %}
-            <div class="cash-ob">{{form.cash_price}}</div>
-            <div class="cash-ob">{{form.cash_per}}</div>
-            <button type="submit" class="sector_btn">저장</button>
+            <div class="port-ob">
+                {{form.cash_price.label}}
+                {{form.cash_price}}
+            </div>
+            <div class="port-ob">
+                {{form.cash_per.label}}
+                {{form.cash_per}}
+            </div>
+            <button type="submit" class="port_btn">저장</button>
         </form> 
-    </div>
+   </div>
 {% endblock %}

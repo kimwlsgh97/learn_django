@@ -10,7 +10,7 @@ from django.contrib.auth import login, authenticate
 
 from django.contrib.auth.models import User
 from .models import Post, Comment, Myport, Sector, Mycorp, Corp
-from .forms import PostForm, CommentForm, MyportForm, SectorForm, TestForm
+from .forms import PostForm, CommentForm, MyportForm, SectorForm, CashForm
 
 
 
@@ -58,32 +58,51 @@ def port(request):
 @login_required
 def port_new(request):
     if request.method == "POST":
-        portname = request.POST.get('portname')
-        cash_price = request.POST.get('cash_price')
-        cash_per = request.POST.get('cash_per')
-        Myport.objects.create(username=request.user, portname=portname, port_price=cash_price, cash_price=cash_price, cash_per=cash_per)
+        form = MyportForm(request.POST)
+        if form.is_valid():
+            port = form.save(commit=False)
+            port.username = request.user
+            port.save()
         return redirect('port')
-    return render(request, 'portfolio/port_new.html')
+    else:
+        form = MyportForm()
+    return render(request, 'portfolio/port_new.html', {'form':form})
 
 @login_required
 def port_edit(request, pk):
     edit = True
     port_g = get_object_or_404(Myport, pk=pk)
     if request.method == "POST":
-        port_f = Myport.objects.filter(pk=pk)
-        portname = request.POST.get('portname')
-        cash_price = request.POST.get('cash_price')
-        cash_per = request.POST.get('cash_per')
+        form = MyportForm(request.POST, instance=port_g)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect('port')
+    else:
+        form = MyportForm(instance=port_g)        
 
-        intCash = int(cash_price)
+    return render(request, 'portfolio/port_edit.html', {'port':port_g, 'edit':edit, 'form':form})
 
-        port_price = port_g.port_price - port_g.cash_price + intCash
+@login_required
+def cash_edit(request, pk):
+    port_g = get_object_or_404(Myport, pk=pk)
+    if request.method == "POST":
+        form = CashForm(request.POST, instance=port_g)
 
-        port_f.update(portname=portname, port_price=port_price, cash_price=cash_price, cash_per=cash_per)
-        return redirect('port')
+        # 폼에서 정보 받아오기 전에 이전 정보 불러오기 (is_valid 전에)
+        pre_port_price = port_g.port_price
+        pre_cash_price = port_g.cash_price
         
-
-    return render(request, 'portfolio/port_edit.html', {'port':port_g, 'edit':edit})
+        if form.is_valid():
+            cash_price = int(form.cleaned_data['cash_price'])
+            now_port_price = pre_port_price - pre_cash_price + cash_price
+            cash = form.save(commit=False)
+            cash.port_price = now_port_price
+            cash.save()
+        return redirect('port')
+    else:
+        form = CashForm(instance=port_g)
+    return render(request, 'portfolio/cash_edit.html', {'port':port_g, 'form': form})
 
 @login_required
 def port_remove(request, pk):
@@ -177,43 +196,30 @@ def corp_remove(request,pk):
 @login_required
 def add_count(request):
     if request.method=='POST':
-        count = request.POST.get('stock_count')
+        stock_count = request.POST.get('stock_count')
         corp_pk = request.POST.get('corp_pk')
-        sector_pk = request.POST.get('sector_pk')
-        port_pk = request.POST.get('port_pk')
-        price = request.POST.get('stock_price')
+        # sector_pk = request.POST.get('sector_pk')
+        # port_pk = request.POST.get('port_pk')
+        stock_price = request.POST.get('stock_price')
         
-        # corp = get_object_or_404(Mycorp, pk=pk)
-        total_price = int(price) * int(count)
-        corp = Mycorp.objects.filter(pk=corp_pk)
-        corp.update(stock_count=count, total_price=total_price)
+        mycorp = Mycorp.objects.filter(pk=corp_pk)
+        mycorp_g = Mycorp.objects.get(pk=corp_pk)
+        now_total_price = int(stock_price) * int(stock_count)
+        pre_total_price = mycorp_g.total_price
+        mycorp.update(stock_count=stock_count, total_price=now_total_price)
 
+        sector_pk = mycorp_g.sector.pk
+        sector = Sector.objects.filter(pk=sector_pk)
         sector_g = Sector.objects.get(pk=sector_pk)
-        sector_corps = Mycorp.objects.filter(sector=sector_g)
+        # 기존의 종목금액 - 이전 회사 종목금액 + 현재 회사 종목금액
+        sector_price = sector_g.sector_price - pre_total_price + now_total_price
+        sector.update(sector_price=sector_price)
 
-        sector_price = 0
-        for corp in sector_corps:
-            sector_price += corp.total_price
-        
-        sector_f = Sector.objects.filter(pk=sector_pk)
-        sector_f.update(sector_price=sector_price)
-
-        # 해당 회사가 속한 포트폴리오 가져오기
+        port_pk = mycorp_g.port.pk
+        port = Myport.objects.filter(pk=port_pk)
         port_g = Myport.objects.get(pk=port_pk)
-
-        # 포트폴리오에 속한 종목 가져오기
-        port_sectors = Sector.objects.filter(port=port_g)
-
-        # 포트폴리오 총 금액 계산하기
-        port_price = 0
-        for sector in port_sectors:
-            port_price += sector.sector_price
-
-        # 업데이트하기위해 포트폴리오 쿼리셋 불러옴
-        port_f = Myport.objects.filter(pk=port_pk)
-
-        # 포트폴리오 총금액 저장
-        port_f.update(port_price=port_price)
+        port_price = port_g.port_price - pre_total_price + now_total_price
+        port.update(port_price=port_price)
         
         
     return redirect('port')
