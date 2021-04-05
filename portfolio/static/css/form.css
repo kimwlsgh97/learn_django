@@ -40,6 +40,7 @@
 .cash_title {
     margin-bottom: 15px;
     font-size: 24px;
+    color: #ffffff;
 }
 
 .login_btn,
@@ -71,10 +72,8 @@
 
 .corp_form{
     margin: 0 10px 0 10px;
-    display: flex;
-    justify-content: space-between;
+    display: flex;;
     align-items: center;
-    margin-bottom: 10px;
 }
 
 .port-form {
