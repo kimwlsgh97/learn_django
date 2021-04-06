@@ -46,7 +46,9 @@ body {
 }
 
 .main_title{
+    color: #ffffff;
     font-size: 16px;
+    float: right;
 }
 
 .search_form {
@@ -55,7 +57,8 @@ body {
 
 .search_btn{
     margin-left: 10px;
-    background-color: #ffffff;
+    background-color: #15003E;
+    color: #ffffff;
     border:none;
 }
 
