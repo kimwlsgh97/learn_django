@@ -9,6 +9,7 @@
             {% endif %}
         </div>
         {% if user.is_authenticated %}
+            {% if all_ports %}
             {% for port in all_ports %}
                 <div class="all_port">
                     <div class="port_header">
@@ -106,6 +107,9 @@
                     </div>
                 </div>
             {% endfor %}
+            {% else %}
+                <div class="none_port"></div>
+            {% endif %}
         {% endif %}
     </div>
 {% endblock %}

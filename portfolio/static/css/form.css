@@ -80,3 +80,14 @@
     display: flex;
     align-items: center;
 }
+
+.login-all {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-all p{
+    margin-top : 20px;
+    color: #ffffff;
+}
