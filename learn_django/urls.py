@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # portfolio 내부의 urls 파일 전부를 포함하도록 지정
     path('', include('portfolio.urls')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
