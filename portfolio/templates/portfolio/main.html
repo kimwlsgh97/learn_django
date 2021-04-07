@@ -24,8 +24,8 @@
                 <button type="submit" class="search_btn"><span class="glyphicon glyphicon-search"></span></button>
             </form> 
             <div class="header-right">
-                <a href="{% url 'login' %}" class="top-menu">로그인</a> 
-                <a href="{% url 'signup' %}" class="top-menu">회원가입</a> 
+                <a href="{% url 'login' %}" class="login_btn">로그인</a> 
+                <a href="{% url 'signup' %}" class="logout_btn">회원가입</a> 
             </div>
         </div>
         <div class="content container">
@@ -36,155 +36,157 @@
                             <div class="port_title">Portfolio</div>
                             <a href="{% url 'login' %}" class="btn make_btn">PoPol<span class="glyphicon glyphicon-plus"></span></a>
                         </div>
-                        <div class="all_port">
-                            <div class="port_header">
-                                <div class="port_name">My PoPol (2,230,600)</div>
-                                <div class="right-box">
-                                    <a href="{% url 'login' %}" class="btn btn_sector_add">종목 <span class="glyphicon glyphicon-plus"></span></a>
-                                    <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
-                                    <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a> 
-                                </div>
-                            </div>
-
-                            <div class="sector">
-                                <div class="cash_bar">
-                                    <div class="left-box">
-                                        <div class="cash_name">현금</div>
-                                        <div class="cash_price">
-                                            <div>보유금액</div>
-                                            <div>20,000,000</div>
-                                        </div>
-                                        <div class="cash_price">
-                                            <div>목표비중</div>
-                                            <div>20%</div>
-                                        </div>
-                                        <div class="cash_price">
-                                            <div>현재비중</div>
-                                            <div>89.7%</div>
-                                        </div>
-                                    </div>
-                                    
-                                    <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
-                                </div>
-                                <div class="sector_bar">
-                                    <div class="left-box">
-                                        <div class="sector_name">반도체</div>
-                                        <div class="sector_price">
-                                            <div>종목금액</div>
-                                            <div>296,000</div>
-                                        </div>
-                                        <div class="pre_per">
-                                            <div>목표비중</div>
-                                            <div>30%</div>
-                                        </div>
-                                        <div class="now_per">
-                                            <div>현재비중</div>
-                                            <div>1.3%</div>
-                                        </div>
-                                    </div>
+                        <div class="ports_container">
+                            <div class="all_port">
+                                <div class="port_header">
+                                    <div class="port_name">My PoPol (2,230,600)</div>
                                     <div class="right-box">
+                                        <a href="{% url 'login' %}" class="btn btn_sector_add">종목 <span class="glyphicon glyphicon-plus"></span></a>
                                         <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
                                         <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a> 
                                     </div>
-                                    </div>
-                                <div class="sector_corps">
-                                        <div class="corp">
-                                            <div class="left-box">
-                                                <div class="main_info">
-                                                    <div class="info stock_name">삼성전자우</div>
-                                                    <div class="info stock_price">73,600 원</div>
-                                                </div>
-                                                <div class="change_corp">
-                                                    <form action="{% url 'login' %}">
-                                                        {% csrf_token %}
-                                                        <label for="count">주식수 : 4</label>
-                                                        <input type="number" name="stock_count" id="count" value="3">
-                                                        <button type="submit" class="btn">계산</button>
-                                                    </form>
-                                                    <form action="{% url 'login' %}">
-                                                        {% csrf_token %}
-                                                        <label for="sector_change">종목 : </label>
-                                                        <select name="sector" id="sectors" class="select">
-                                                            <option value="전기차">전기차</option>
-                                                            <option value="반도체">반도체</option>
-                                                        </select>
-                                                        <button type="submit" class="btn">재분류</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div class="right-box">
-                                                <h4>총 296,000원</h4>
-                                                <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a>
-                                            </div>
-                                                                        
-                                        </div>
                                 </div>
-                                <div class="sector_bar">
-                                    <div class="left-box">
-                                        <div class="sector_name">전기차</div>
-                                        <div class="sector_price">
-                                            <div>종목금액</div>
-                                            <div>2,010,000</div>
+    
+                                <div class="sector">
+                                    <div class="cash_bar">
+                                        <div class="left-box">
+                                            <div class="cash_name">현금</div>
+                                            <div class="cash_price">
+                                                <div>보유금액</div>
+                                                <div>20,000,000</div>
+                                            </div>
+                                            <div class="cash_price">
+                                                <div>목표비중</div>
+                                                <div>20%</div>
+                                            </div>
+                                            <div class="cash_price">
+                                                <div>현재비중</div>
+                                                <div>89.7%</div>
+                                            </div>
                                         </div>
-                                        <div class="pre_per">
-                                            <div>목표비중</div>
-                                            <div>30%</div>
-                                        </div>
-                                        <div class="now_per">
-                                            <div>현재비중</div>
-                                            <div>9.0%</div>
-                                        </div>
+                                        
+                                        <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
                                     </div>
-                                    <div class="right-box">                                        <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
-                                        <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a> 
-                                    </div>
-                                </div>
-                                <div class="sector_corps">
-                                        <div class="corp">
-                                            <div class="left-box">
-                                                <div class="main_info">
-                                                    <div class="info stock_name">현대차우</div>
-                                                    <div class="info stock_price">100,500원</div>
+                                    <div class="sector_bar">
+                                        <div class="left-box">
+                                            <div class="sector_name">반도체</div>
+                                            <div class="sector_price">
+                                                <div>종목금액</div>
+                                                <div>296,000</div>
+                                            </div>
+                                            <div class="pre_per">
+                                                <div>목표비중</div>
+                                                <div>30%</div>
+                                            </div>
+                                            <div class="now_per">
+                                                <div>현재비중</div>
+                                                <div>1.3%</div>
+                                            </div>
+                                        </div>
+                                        <div class="right-box">
+                                            <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
+                                            <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a> 
+                                        </div>
+                                        </div>
+                                    <div class="sector_corps">
+                                            <div class="corp">
+                                                <div class="left-box">
+                                                    <div class="main_info">
+                                                        <div class="info stock_name">삼성전자우</div>
+                                                        <div class="info stock_price">73,600 원</div>
+                                                    </div>
+                                                    <div class="change_corp">
+                                                        <form action="{% url 'login' %}">
+                                                            {% csrf_token %}
+                                                            <label for="count">주식수 : 4</label>
+                                                            <input type="number" name="stock_count" id="count" value="3">
+                                                            <button type="submit" class="btn">계산</button>
+                                                        </form>
+                                                        <form action="{% url 'login' %}">
+                                                            {% csrf_token %}
+                                                            <label for="sector_change">종목 : </label>
+                                                            <select name="sector" id="sectors" class="select">
+                                                                <option value="전기차">전기차</option>
+                                                                <option value="반도체">반도체</option>
+                                                            </select>
+                                                            <button type="submit" class="btn">재분류</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                                <div class="change_corp">
-                                                    <form action="{% url 'login' %}">
-                                                        {% csrf_token %}
-                                                        <label for="count">주식수 : 20</label>
-                                                        <input type="number" name="stock_count" id="count" value="3">
-                                                        <button type="submit" class="btn">계산</button>
-                                                    </form>
-                                                    <form action="{% url 'login' %}">
-                                                        {% csrf_token %}
-                                                        <label for="sector_change">종목 : </label>
-                                                        <select name="sector" id="sectors" class="select">
-                                                            <option value="전기차">전기차</option>
-                                                            <option value="반도체">반도체</option>
-                                                        </select>
-                                                        <button type="submit" class="btn">재분류</button>
-                                                    </form>
-                                                </div>                                              
+                                                <div class="right-box">
+                                                    <h4>총 296,000원</h4>
+                                                    <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a>
+                                                </div>
+                                                                            
                                             </div>
-                                            <div class="right-box">
-                                                <h4>총 2,010,000원</h4>
-                                                <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a>
-                                            </div>
-                                                                        
-                                        </div>
-                                </div>
-                            </div>
-                            
-                            <div class="none_corp">
-                                <div class="port_corp_n">
-                                    <div class="left-box">
-                                        <div class="stock_name">SK하이닉스</div>
-                                        <select name="sector" id="sectors" class="select">
-                                            <option value="전기차">전기차</option>
-                                            <option value="반도체">반도체</option>
-                                        </select>
-                                        <a href="{% url 'login' %}" class="btn">분류</a>
                                     </div>
-                                    <div class="right-box">
-                                        <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-remove"></span></a>
+                                    <div class="sector_bar">
+                                        <div class="left-box">
+                                            <div class="sector_name">전기차</div>
+                                            <div class="sector_price">
+                                                <div>종목금액</div>
+                                                <div>2,010,000</div>
+                                            </div>
+                                            <div class="pre_per">
+                                                <div>목표비중</div>
+                                                <div>30%</div>
+                                            </div>
+                                            <div class="now_per">
+                                                <div>현재비중</div>
+                                                <div>9.0%</div>
+                                            </div>
+                                        </div>
+                                        <div class="right-box">                                        <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
+                                            <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a> 
+                                        </div>
+                                    </div>
+                                    <div class="sector_corps">
+                                            <div class="corp">
+                                                <div class="left-box">
+                                                    <div class="main_info">
+                                                        <div class="info stock_name">현대차우</div>
+                                                        <div class="info stock_price">100,500원</div>
+                                                    </div>
+                                                    <div class="change_corp">
+                                                        <form action="{% url 'login' %}">
+                                                            {% csrf_token %}
+                                                            <label for="count">주식수 : 20</label>
+                                                            <input type="number" name="stock_count" id="count" value="3">
+                                                            <button type="submit" class="btn">계산</button>
+                                                        </form>
+                                                        <form action="{% url 'login' %}">
+                                                            {% csrf_token %}
+                                                            <label for="sector_change">종목 : </label>
+                                                            <select name="sector" id="sectors" class="select">
+                                                                <option value="전기차">전기차</option>
+                                                                <option value="반도체">반도체</option>
+                                                            </select>
+                                                            <button type="submit" class="btn">재분류</button>
+                                                        </form>
+                                                    </div>                                              
+                                                </div>
+                                                <div class="right-box">
+                                                    <h4>총 2,010,000원</h4>
+                                                    <a href="{% url 'login' %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a>
+                                                </div>
+                                                                            
+                                            </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="none_corp">
+                                    <div class="port_corp_n">
+                                        <div class="left-box">
+                                            <div class="stock_name">SK하이닉스</div>
+                                            <select name="sector" id="sectors" class="select">
+                                                <option value="전기차">전기차</option>
+                                                <option value="반도체">반도체</option>
+                                            </select>
+                                            <a href="{% url 'login' %}" class="btn">분류</a>
+                                        </div>
+                                        <div class="right-box">
+                                            <a href="{% url 'login' %}" class="btn"><span class="glyphicon glyphicon-remove"></span></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

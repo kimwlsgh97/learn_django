@@ -9,11 +9,11 @@
         <form method="post" class="sector_form">
             {% csrf_token %}
             <div class="sector-ob">
-                {{form.sector_name.label}}
+                <label>{{form.sector_name.label}}</label>
                 {{form.sector_name}}
             </div>
             <div class="sector-ob">
-                {{form.sector_per.label}}
+                <label>{{form.sector_per.label}}</label>
                 {{form.sector_per}}
             </div>
             <button type="submit" class="sector_btn">저장</button>

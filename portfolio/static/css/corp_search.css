@@ -3,6 +3,7 @@
     justify-content: space-between;
     margin-bottom: 70px;
     border-bottom: 1px solid gray;
+    color:#333333;
 }
 
 .search_info {
@@ -16,6 +17,13 @@
     justify-content: center;
 }
 
+.search_name,
+.search_price,
+.search_label{
+    color: #333333;
+}
+
+.search_name,
 .search_label{
     font-size: 20px;
 }

@@ -11,99 +11,101 @@
         {% if user.is_authenticated %}
             {% if all_ports %}
             {% for port in all_ports %}
-                <div class="all_port">
-                    <div class="port_header">
-                        <div class="port_name">{{port.portname}} ({{port.port_price|for_cash}})</div>
-                        <div class="right-box">
-                            <a href="{% url 'sector_new' pk=port.pk %}" class="btn btn_sector_add">종목 <span class="glyphicon glyphicon-plus"></span></a>
-                            <a href="{% url 'port_edit' pk=port.pk %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
-                            <a href="{% url 'port_remove' pk=port.pk %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a> 
-                        </div>
-                    </div>
-
-                    <div class="sector">
-                        <div class="cash_bar">
-                            <div class="left-box">
-                                <div class="cash_name">현금</div>
-                                <div class="cash_price">보유금액 : {{ port.cash_price|for_cash }}</div>
-                                <div class="cash_price">목표비중 : {{port.cash_per}}%</div>
-                                <div class="cash_price">현재비중 : {{port.cash_price|int_div:port.port_price}}%</div>
+                <div class="ports_container">
+                    <div class="all_port">
+                        <div class="port_header">
+                            <div class="port_name">{{port.portname}} ({{port.port_price|for_cash}})</div>
+                            <div class="right-box">
+                                <a href="{% url 'sector_new' pk=port.pk %}" class="btn btn_sector_add">종목 <span class="glyphicon glyphicon-plus"></span></a>
+                                <a href="{% url 'port_edit' pk=port.pk %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
+                                <a href="{% url 'port_remove' pk=port.pk %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a> 
                             </div>
-                            <a href="{% url 'cash_edit' pk=port.pk %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
                         </div>
-                    {% for sector in port.sectors.all %}
-                            <div class="sector_bar">
+    
+                        <div class="sector">
+                            <div class="cash_bar">
                                 <div class="left-box">
-                                    <div class="sector_name">{{sector.sector_name}}</div>
-                                    <div class="sector_price">종목금액 : {{sector.sector_price|for_cash}}</div>
-                                    <div class="pre_per">목표비중 : {{sector.sector_per}}%</div>
-                                    <div class="now_per">현재비중 : {{sector.sector_price|int_div:port.port_price}}%</div>
+                                    <div class="cash_name">현금</div>
+                                    <div class="cash_price">보유금액 : {{ port.cash_price|for_cash }}</div>
+                                    <div class="cash_price">목표비중 : {{port.cash_per}}%</div>
+                                    <div class="cash_price">현재비중 : {{port.cash_price|int_div:port.port_price}}%</div>
                                 </div>
-                                <div class="right-box">
-                                    <a href="{% url 'sector_edit' pk=sector.pk %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
-                                    <a href="{% url 'sector_remove' pk=sector.pk %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a>
-                                </div>
+                                <a href="{% url 'cash_edit' pk=port.pk %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
                             </div>
-                            <div class="sector_corps">
-                                {% for corp in sector.corps.all %}
-                                    <div class="corp">
-                                        <div class="left-box">
-                                            <div class="main_info">
-                                                <div class="info stock_name">{{corp.stock_name}}</div>
-                                                <div class="info stock_price">{{corp.info.stock_price|for_cash}}</div>
-                                            </div>
-                                            <div class="change_corp">
-                                                <form action="{% url 'add_count' %}" method="post" class="corp_form">
-                                                    {% csrf_token %}
-                                                    <label for="count">주식수 : </label>
-                                                    <input type="number" name="stock_count" id="count" value="{{corp.stock_count}}">
-                                                    <input type="hidden" name="corp_pk" value="{{corp.pk}}">
-                                                    <input type="hidden" name="stock_price" value="{{corp.info.stock_price}}">
-                                                    <button type="submit" class="btn">적용</button>
-                                                </form>
-                                                <form action="{% url 'change_sector' pk=corp.pk %}" method="post" class="corp_form">
-                                                    {% csrf_token %}
-                                                    <label for="sector_change">종목 : </label>
-                                                    <select name="sector" id="sectors" class="select">
-                                                        {% for sector in port.sectors.all %}
-                                                            <option value={{sector}}>{{sector}}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                    <button type="submit" class="btn">재분류</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="right-box">
-                                            <div class="total_price">투자금 : {{corp.total_price|for_cash}}</div>
-                                            <a href="{% url 'corp_remove' pk=corp.pk %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a>
-                                        </div>
-                                                                    
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div class="none_corp">
-                        {% for n_corp in port.corps.all %}
-                            {% if not n_corp.sector %}
-                                <div class="port_corp_n">
+                        {% for sector in port.sectors.all %}
+                                <div class="sector_bar">
                                     <div class="left-box">
-                                        <div class="stock_name">{{n_corp}}</div>
-                                        <form action="{% url 'add_corp_to_sector' pk=n_corp.pk%}" method="post" class="none_form">
-                                            {% csrf_token %}
-                                            <select name="sector" id="sectors" class="select">
-                                                {% for sector in port.sectors.all %}
-                                                    <option value={{sector}}>{{sector}}</option>
-                                                {% endfor %}
-                                            </select>
-                                            <button type="submit" class="btn">분류</button>
-                                        </form>
+                                        <div class="sector_name">{{sector.sector_name}}</div>
+                                        <div class="sector_price">종목금액 : {{sector.sector_price|for_cash}}</div>
+                                        <div class="pre_per">목표비중 : {{sector.sector_per}}%</div>
+                                        <div class="now_per">현재비중 : {{sector.sector_price|int_div:port.port_price}}%</div>
                                     </div>
-                                    <a href="{% url 'corp_remove' pk=n_corp.pk %}" class="btn"><span class="glyphicon glyphicon-remove"></span></a>
+                                    <div class="right-box">
+                                        <a href="{% url 'sector_edit' pk=sector.pk %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
+                                        <a href="{% url 'sector_remove' pk=sector.pk %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a>
+                                    </div>
                                 </div>
-                            {% endif %}
-                        {% endfor %}
+                                <div class="sector_corps">
+                                    {% for corp in sector.corps.all %}
+                                        <div class="corp">
+                                            <div class="left-box">
+                                                <div class="main_info">
+                                                    <div class="info stock_name">{{corp.stock_name}}</div>
+                                                    <div class="info stock_price">{{corp.info.stock_price|for_cash}}</div>
+                                                </div>
+                                                <div class="change_corp">
+                                                    <form action="{% url 'add_count' %}" method="post" class="corp_form">
+                                                        {% csrf_token %}
+                                                        <label for="count">주식수 : </label>
+                                                        <input type="number" name="stock_count" id="count" value="{{corp.stock_count}}">
+                                                        <input type="hidden" name="corp_pk" value="{{corp.pk}}">
+                                                        <input type="hidden" name="stock_price" value="{{corp.info.stock_price}}">
+                                                        <button type="submit" class="btn">적용</button>
+                                                    </form>
+                                                    <form action="{% url 'change_sector' pk=corp.pk %}" method="post" class="corp_form">
+                                                        {% csrf_token %}
+                                                        <label for="sector_change">종목 : </label>
+                                                        <select name="sector" id="sectors" class="select">
+                                                            {% for sector in port.sectors.all %}
+                                                                <option value={{sector}}>{{sector}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                        <button type="submit" class="btn">재분류</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="right-box">
+                                                <div class="total_price">투자금 : {{corp.total_price|for_cash}}</div>
+                                                <a href="{% url 'corp_remove' pk=corp.pk %}" class="btn remove_btn"><span class="glyphicon glyphicon-remove"></span></a>
+                                            </div>
+                                                                        
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="none_corp">
+                            {% for n_corp in port.corps.all %}
+                                {% if not n_corp.sector %}
+                                    <div class="port_corp_n">
+                                        <div class="left-box">
+                                            <div class="stock_name">{{n_corp}}</div>
+                                            <form action="{% url 'add_corp_to_sector' pk=n_corp.pk%}" method="post" class="none_form">
+                                                {% csrf_token %}
+                                                <select name="sector" id="sectors" class="select">
+                                                    {% for sector in port.sectors.all %}
+                                                        <option value={{sector}}>{{sector}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <button type="submit" class="btn">분류</button>
+                                            </form>
+                                        </div>
+                                        <a href="{% url 'corp_remove' pk=n_corp.pk %}" class="btn"><span class="glyphicon glyphicon-remove"></span></a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             {% endfor %}

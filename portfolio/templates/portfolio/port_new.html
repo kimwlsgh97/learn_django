@@ -6,7 +6,7 @@
         <form method="post" class="port_form">
             {% csrf_token %}
             <div class="port-ob">
-                {{form.portname.label}}
+                <label>{{form.portname.label}}</label>
                 {{form.portname}}
             </div>
             <button type="submit" class="port_btn">저장</button>

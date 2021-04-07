@@ -11,6 +11,15 @@
     padding: 20px;
     border: 1px solid gray;
     border-radius: 20px;
+    box-shadow: inset -6px -6px 15px rgba(145, 160, 180, 0.45), 30px 30px 40px rgba(118, 146, 180, 0.18);
+}
+
+.login-con label, 
+.sector-con label, 
+.port-con label,
+.cash-con label,
+.signup-con label {
+    color: #333333;
 }
 
 .login-con,

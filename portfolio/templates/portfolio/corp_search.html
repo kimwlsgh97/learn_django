@@ -4,8 +4,8 @@
         {% for corp in corps %}
             <div class="search_corp">
                 <div class="search_info">
-                    <h1>{{corp.stock_name}}</h1>
-                    <h4>주가 : {{corp.stock_price|linebreaksbr}}원</h4>
+                    <div class="search_name">{{corp.stock_name}}</div>
+                    <div class="search_price">주가 : {{corp.stock_price|linebreaksbr}}원</div>
                 </div>
                 
                 {% if ports %}
@@ -22,13 +22,13 @@
 
                         <input type="hidden" name="stock_name" value="{{corp.stock_name}}">
                         <input type="hidden" name="stock_code" value="{{corp.stock_code}}">
-                        <button type="submit" class="btn btn-default">추가</button>
+                        <button type="submit" class="btn">추가</button>
                     
                     </form>
                 {% else %}
                     <div class="not_search">
-                        <p>포트폴리오가 없습니다</p>
-                        <a href="{% url 'port' %}" class="btn btn-default">만들기</a>       
+                        <div>포트폴리오가 없습니다</div>
+                        <a href="{% url 'port' %}" class="btn">만들기</a>       
                     </div>
                 {% endif %}
             </div>
