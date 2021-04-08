@@ -3,7 +3,7 @@ Description=uWSGI service
 After=syslog.target
 
 [Service]
-ExecStart=/home/ubuntu/myvenv/bin/uwsgi -i /home/ubuntu/<프로젝트>/.config/uwsgi/<프로젝트>.ini
+ExecStart=/home/ubuntu/myvenv/bin/uwsgi -i /home/ubuntu/learn_django/.config/uwsgi/learn_django.ini
 
 Restart=always
 KillSignal=SIGQUIT
