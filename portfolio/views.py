@@ -167,13 +167,19 @@ def sector_remove(request,pk):
 
 @login_required
 def add_corp_to_sector(request, pk):
-    mycorp = Mycorp.objects.get(pk=pk)
-    sector_name = request.POST.get('sector')
-    sector = Sector.objects.get(sector_name=sector_name)
-    if sector:
-        print(sector, mycorp)
-        mycorp.sector = sector
-        mycorp.save()
+    if request.method=='POST':
+        mycorp = Mycorp.objects.get(pk=pk)
+
+        port_pk = request.POST.get('port_pk')
+        port = Myport.objects.get(pk=port_pk)
+
+        sector_name = request.POST.get('sector')
+
+        sector = Sector.objects.get(port=port,sector_name=sector_name)
+        if sector:
+            print(sector, mycorp)
+            mycorp.sector = sector
+            mycorp.save()
     return redirect('port')
 
 @login_required

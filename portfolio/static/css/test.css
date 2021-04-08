@@ -1,0 +1,39 @@
+.total-con {
+    padding: 20px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: inset -6px -6px 15px rgba(145, 160, 180, 0.45), 30px 30px 40px rgba(118, 146, 180, 0.18);
+    margin-bottom: 20px;
+}
+
+.clean_total {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 5px 10px;
+}
+
+.to_left_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.to_info {
+    display:flex;
+}
+
+.to_sec {
+    padding: 5px 10px;
+    border: 1px solid gray;
+}
+
+.to_right_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sec_graph {
+    padding: 5px 10px;
+}

@@ -70,6 +70,7 @@
                                                                 <option value={{sector}}>{{sector}}</option>
                                                             {% endfor %}
                                                         </select>
+                                                        <input type="hidden" name="port_pk" value="{{port.pk}}">
                                                         <button type="submit" class="btn">재분류</button>
                                                     </form>
                                                 </div>
@@ -98,6 +99,7 @@
                                                         <option value={{sector}}>{{sector}}</option>
                                                     {% endfor %}
                                                 </select>
+                                                <input type="hidden" name="port_pk" value="{{port.pk}}">
                                                 <button type="submit" class="btn">분류</button>
                                             </form>
                                         </div>

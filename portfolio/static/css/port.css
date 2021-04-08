@@ -27,6 +27,7 @@
     justify-content: center;
     padding: 20px;
     box-shadow: inset -6px -6px 15px rgba(145, 160, 180, 0.45), 30px 30px 40px rgba(118, 146, 180, 0.18);
+    margin-bottom: 20px;
 }
 
 .all_port {
