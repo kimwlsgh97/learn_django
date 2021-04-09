@@ -32,7 +32,8 @@ ALLOWED_HOSTS = [
     'localhost', 
     '127.0.0.1', 
     'jinho971031.pythonanywhere.com', 
-    'ec2-52-78-49-168.ap-northeast-2.compute.amazonaws.com'
+    'ec2-52-78-49-168.ap-northeast-2.compute.amazonaws.com',
+    '.popol.kro.kr',
     ]
 
 
