@@ -10,7 +10,32 @@
         </div>
         {% if user.is_authenticated %}
             {% if all_ports %}
+                
             {% for port in all_ports %}
+                <div class="total-con">
+                    <div class="clean_total">
+                        <div class="to_left_box">
+                            <div class="title_cl_to">
+                                <h4>전체 비중</h4>
+                            </div>
+                            <div class="to_info">
+                                <div class="to_sec">
+                                    <div>현금</div>
+                                    <div>{{port.cash_price|int_div:port.port_price}}%</div>
+                                </div>
+                                {% for sector in port.sectors.all %}
+                                    <div class="to_sec">
+                                        <div>{{sector.sector_name}}</div>
+                                        <div>{{sector.sector_price|int_div:port.port_price}}%</div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="to_right_box">
+                            <div class="sec_graph"></div>
+                        </div>
+                    </div>
+                </div>
                 <div class="ports_container">
                     <div class="all_port">
                         <div class="port_header">
@@ -32,7 +57,7 @@
                                 </div>
                                 <a href="{% url 'cash_edit' pk=port.pk %}" class="btn"><span class="glyphicon glyphicon-edit"></span></a> 
                             </div>
-                        {% for sector in port.sectors.all %}
+                            {% for sector in port.sectors.all %}
                                 <div class="sector_bar">
                                     <div class="left-box">
                                         <div class="sector_name">{{sector.sector_name}}</div>
