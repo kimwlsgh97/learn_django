@@ -47,10 +47,12 @@ def update():
     else:
         print("주말")
         if(week == 5):
+            print("토요일")
             fnDate = beforeDay(now, 1)
         elif(week == 6):
+            print("일요일")
             fnDate = beforeDay(now, 2)
-        inputDB(now.strftime("%Y%m%d"))
+        inputDB(fnDate.strftime("%Y%m%d"))
 
 
 # corp db에 저장

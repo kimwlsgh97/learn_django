@@ -12,8 +12,6 @@ from django.contrib.auth.models import User
 from .models import Post, Comment, Myport, Sector, Mycorp, Corp
 from .forms import PostForm, CommentForm, MyportForm, SectorForm, CashForm
 
-
-
 # from django.http import HttpResponse
 
 # Create your views here.

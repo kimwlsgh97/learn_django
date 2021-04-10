@@ -1,4 +1,5 @@
 from django import template
+from matplotlib import pyplot as plt
 
 register = template.Library()
 
